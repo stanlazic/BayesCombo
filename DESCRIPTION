@@ -1,0 +1,14 @@
+Package: BayesCombo
+Title: Bayesian Evidence Combination
+Version: 0.1
+Date: 2016-06-07
+Author: Bruno Contrino, Stanley E. Lazic
+Maintainer: Stanley E. Lazic <stan.lazic@cantab.net>
+Description: What the package does (one paragraph).
+Depends: R (>= 2.10)
+License: GPL-3
+LazyData: true
+Suggests: knitr
+URL: https://github.com/stanlazic/BayesCombo
+BugReports: https://github.com/stanlazic/BayesCombo/issues
+VignetteBuilder: knitr
