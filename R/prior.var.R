@@ -8,14 +8,32 @@
 #'@inheritParams plot.BFcombo
 #'
 #' @return vector of equal length to that of the observed variances.
-#' @seealso \code{\link{make_BFcombo}}
+#' @seealso \code{\link{make.BFcombo}}
 #'
 #' @examples
-#' x <- make_BFcombo( beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, pi0 = rep(1/3,3) )
+#' x <- make.BFcombo( beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, pi0 = rep(1/3,3) )
 #' x<- PriorVar(x)
 #'
-prior.var<- function(BFcombo,percent = 99){
-  if(all.equal(intersect(names(BFcombo),c("beta1", "var1", "beta0", "pi0")), c("beta1", "var1", "beta0", "pi0"))){
+prior.var<- function(beta1, var1, beta0, pi0, percent = 99){
+  if(is.numeric(beta1) != TRUE){
+    stop("beta1 is not numeric")
+  }
+  
+  if(is.numeric(var1) != TRUE){
+    stop("var1 is not numeric")
+  }
+  
+  if(is.numeric(beta0) != TRUE){
+    stop("beta0 is not numeric")
+  }
+  
+  if(is.numeric(pi0) != TRUE){
+    stop("pi0 is not numeric")
+  } else if (sum(pi0) != 1){
+    stop("Prior model probabilities do not sum to 1") 
+  }
+
+  BFcombo<- make.BFcombo(beta1,var1,beta0,pi0)
     #setup
     percent<- (percent / 100)
     percent<- percent + (1-percent)/2
@@ -32,14 +50,7 @@ prior.var<- function(BFcombo,percent = 99){
     BFcombo$var0 <- pVar
     
     return(BFcombo)
-  } else{
-    if(class(BFcombo) == "BFcombo"){
-      stop("Input of class BFcombo not in the right form please see function make.BFcombo.")
-    } else{
-      stop("Input  not of class BFcombo please see function make.BFcombo.")
-    }
-  }
-  
+   
 }
 
 #' @rdname This function creates the BFcombo class from the inputs.
@@ -49,7 +60,9 @@ prior.var<- function(BFcombo,percent = 99){
 #' @param beta0 Value of prior mean (usually 0)
 #' @param pi0 Vector of prior model probabilities.
 #' 
-make.BFCombo<- function(beta1, var1, beta0, pi0){
+make.BFcombo<- function(beta1, var1, beta0, pi0){
   BFcombo<- structure(list(beta1 = beta1, var1 = var1,
                            beta0 = beta0, pi0 = pi0 ), class = "BFcombo")
+  BFcombo
+  
 }

@@ -5,18 +5,23 @@
 #' probabilities. 
 #'
 #'
-#'@param beta1
+#'@param beta1 Vector of observed means
+#'@param var1 Vector of observed variances
+#'@param pi0 Vector of prior model probabilities
+#'@param beta0 Vector or value of prior means (usually 0)
+#'@param n Number of times distributions are sampled
+#'@param var.mult Multiplier of the prior variances. 
 #'
 #' @return Object of class BFcombo which contains a matrix of posterior model probabilities for each updated step.
-#' @seealso \code{\link{pi0.to.1}}
+#' @seealso \code{\link{prior.var} \link{u.post.param} \link{unconstrained.BF} \link{update.PMP}}
 #'
 #' @examples
 #' x <- PMP.func( beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, pi0 = rep(1/3,3) )
 #' 
 
 calculate.PMP <- function(beta1, var1,pi0,beta0, n = 10000, var.mult = 1){
-  BFcombo <- make.BFCombo(beta1 = beta1, var1 = var1, beta0 = beta0, pi0 = pi0)
-  BFcombo <- prior.var(BFcombo)
+
+  BFcombo <- prior.var(beta1 = beta1, var1 = var1, beta0 = beta0, pi0 = pi0)
   
   BFcombo$var0 <- BFcombo$var0*var.mult
   
