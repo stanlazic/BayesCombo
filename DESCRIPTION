@@ -4,11 +4,17 @@ Version: 0.1
 Date: 2016-06-07
 Author: Bruno Contrino, Stanley E. Lazic
 Maintainer: Stanley E. Lazic <stan.lazic@cantab.net>
-Description: What the package does (one paragraph).
-Depends: R (>= 2.10)
+Description: BayesCombo implements a Method for Combining Evidence Across Multiple Studies
+    using Bayes Factors.
+Depends:
+    R (>= 2.10),
+    ggplot2 (>= 2.1.0)
 License: GPL-3
 LazyData: true
-Suggests: knitr
+Suggests:
+    knitr,
+    rmarkdown
 URL: https://github.com/stanlazic/BayesCombo
 BugReports: https://github.com/stanlazic/BayesCombo/issues
 VignetteBuilder: knitr
+RoxygenNote: 5.0.1
