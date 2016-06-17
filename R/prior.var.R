@@ -15,22 +15,31 @@
 #' x<- PriorVar(x)
 #'
 prior.var<- function(BFcombo,percent = 99){
-  #setup
-  percent<- (percent / 100)
-  percent<- percent + (1-percent)/2
-  multiplier<- qnorm(percent)
-  data<- matrix(0, ncol = 2 , nrow = length(BFcombo$beta1))
-  # get min/max
-  data[,1]<- BFcombo$beta1 - sqrt(BFcombo$var1)*multiplier
-  data[,2]<- BFcombo$beta1 + sqrt(BFcombo$var1)*multiplier
-
-  bounds<- abs(data)
-  pVar <- apply(X = bounds,MARGIN = 1,max)
-  pVar <- ((pVar / multiplier))^2
-  # update.object
-  BFcombo$var0 <- pVar
-
-  return(BFcombo)
+  if(all.equal(intersect(names(BFcombo),c("beta1", "var1", "beta0", "pi0")), c("beta1", "var1", "beta0", "pi0"))){
+    #setup
+    percent<- (percent / 100)
+    percent<- percent + (1-percent)/2
+    multiplier<- qnorm(percent)
+    data<- matrix(0, ncol = 2 , nrow = length(BFcombo$beta1))
+    # get min/max
+    data[,1]<- BFcombo$beta1 - sqrt(BFcombo$var1)*multiplier
+    data[,2]<- BFcombo$beta1 + sqrt(BFcombo$var1)*multiplier
+    
+    bounds<- abs(data)
+    pVar <- apply(X = bounds,MARGIN = 1,max)
+    pVar <- ((pVar / multiplier))^2
+    # update.object
+    BFcombo$var0 <- pVar
+    
+    return(BFcombo)
+  } else{
+    if(class(BFcombo) == "BFcombo"){
+      stop("Input of class BFcombo not in the right form please see function make.BFcombo.")
+    } else{
+      stop("Input  not of class BFcombo please see function make.BFcombo.")
+    }
+  }
+  
 }
 
 #' @rdname This function creates the BFcombo class from the inputs.

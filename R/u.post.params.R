@@ -29,9 +29,9 @@ u.post.param<- function(BFcombo){
     return(BFcombo)
   } else {
     if(class(BFcombo) != "BFcombo"){
-      stop("Input not of BFcombo class please use make_BFcombo")
+      stop("Input not of BFcombo class please use make.BFcombo")
     }else{
-      stop("Unconstrained prior variances not found. Please run PriorVar function")
+      stop("Unconstrained prior variances not found. Please run prior.var function")
     }
   }
   

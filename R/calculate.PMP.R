@@ -15,7 +15,7 @@
 #' 
 
 calculate.PMP <- function(beta1, var1,pi0,beta0, n = 10000, var.mult = 1){
-  BFcombo <- make_BFCombo(beta1 = beta1, var1 = var1, beta0 = beta0, pi0 = pi0)
+  BFcombo <- make.BFCombo(beta1 = beta1, var1 = var1, beta0 = beta0, pi0 = pi0)
   BFcombo <- prior.var(BFcombo)
   
   BFcombo$var0 <- BFcombo$var0*var.mult
