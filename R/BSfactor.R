@@ -8,19 +8,18 @@
 #'
 #' @param BFcombo. A object of the class BFcombo (see make_BFcombo). *** NEED TO CHANGE **
 #'
-#' @return .
-#' @seealso \code{\link{make_BFcombo}}
+#' @return Object of class "BSfactor" which contains a matrix of final posterior model probabilities, a matrix of prior model probabilities,
+#' the 'boundary' and which hypothesis is being considered.
+#' @seealso \code{\link{make.BFcombo}}
 #'
 #' @examples
-#' x <- make_BFcombo( beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, pi0 = rep(1/3,3) )
-#'
-BSfactor <- function(beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, n = 100, hypothesis = 1){
+#' x <- BSfactor( beta1 = c(0.068,-0.084,0.175,0.337), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0 )
+
+BSfactor <- function(beta1, var1, beta0 = 0, n = 100, hypothesis = 1){
 
   values <- seq(0.33333, 0.99999,length.out = n)
   priors <- cbind( "H=0"=values,"H:>"=(1-values)/2, "H:<"=(1-values)/2)
-  count<- 1
   tot.len<- length(priors[,1])
-  stpr<- 0
   studies<- length(beta1)
   output<-priors
   output[]<- 0
@@ -32,6 +31,7 @@ BSfactor <- function(beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002
 
   }
 
+
   if(hypothesis == 1 & output[1,2] < 0.95){
     warning("The probability for the hypothesis H:> is not greater than 0.95 at the first step")
   }
@@ -40,5 +40,13 @@ BSfactor <- function(beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002
     warning("The probability for the hypothesis H:< is not greater than 0.95 at the first step")
   }
 
-  return(list(PMP = output, priorMP = priors ))
+  if (sum(round(output[,1+hypothesis], digits = 3) == 0.950) > 0){
+    boundary<- priors[round(output[,1+hypothesis], digits = 3) == 0.950,][1,]
+  } else if(sum(round(output[,1+hypothesis], digits = 2) == 0.95) > 0){
+    boundary<- priors[round(output[,1+hypothesis], digits = 2) == 0.95,][1,]
+  } else{
+    warning("Not rounding to 0.95 , boundary = NULL")
+    boundary<- NULL
+  }
+  return( structure(list(PMP = output, priorMP = priors, boundary = boundary, hypothesis = hypothesis ),class = "BSfactor"))
 }
