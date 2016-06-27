@@ -15,7 +15,7 @@
 #' @examples
 #' x <- BSfactor( beta1 = c(0.068,-0.084,0.175,0.337), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0 )
 
-BSfactor <- function(beta1, var1, beta0 = 0, n = 100, hypothesis = 1){
+BSfactor <- function(beta1, var1,threshold = 0.95, beta0 = 0, n = 100, hypothesis = 1){
 
   values <- seq(0.33333, 0.99999,length.out = n)
   priors <- cbind( "H=0"=values,"H:>"=(1-values)/2, "H:<"=(1-values)/2)
@@ -32,20 +32,16 @@ BSfactor <- function(beta1, var1, beta0 = 0, n = 100, hypothesis = 1){
   }
 
 
-  if(hypothesis == 1 & output[1,2] < 0.95){
-    warning("The probability for the hypothesis H:> is not greater than 0.95 at the first step")
+  if(hypothesis == 1 & output[1,2] < threshold){
+    warning("The probability for the hypothesis H:> is not greater than threshold at the first step")
   }
 
-  if(hypothesis == 2 & output[1,3] < 0.95){
-    warning("The probability for the hypothesis H:< is not greater than 0.95 at the first step")
-  }
-
-  if (sum(round(output[,1+hypothesis], digits = 3) == 0.950) > 0){
-    boundary<- priors[round(output[,1+hypothesis], digits = 3) == 0.950,][1,]
-  } else if(sum(round(output[,1+hypothesis], digits = 2) == 0.95) > 0){
-    boundary<- priors[round(output[,1+hypothesis], digits = 2) == 0.95,][1,]
+  if(hypothesis == 2 & output[1,3] < threshold){
+    warning("The probability for the hypothesis H:< is not greater than threshold at the first step")
+  } else if(sum(round(output[,1+hypothesis], digits = 2) == threshold) > 0){
+    boundary<- priors[round(output[,1+hypothesis], digits = 2) == threshold,][1,]
   } else{
-    warning("Not rounding to 0.95 , boundary = NULL")
+    warning("Not rounding to threshold , boundary = NULL")
     boundary<- NULL
   }
   return( structure(list(PMP = output, priorMP = priors, boundary = boundary, hypothesis = hypothesis ),class = "BSfactor"))
