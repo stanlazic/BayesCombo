@@ -1,16 +1,20 @@
-#' @title Function for Bayes Safety Factor
+#' @title Calculate Bayes Safety factor
 #'
-#' @description How much can the prior model probability be weighted to the null hypothesis.
+#' @description Calculates how much can the prior model probability be weighted to the null hypothesis.
 #'
 #' @details Breaks the weights from the probability being 1/3 for each hypothesis to incrementally give the
 #' null hypothisis more weight.
 #'
 #'
-#' @param BFcombo. A object of the class BFcombo (see make_BFcombo). *** NEED TO CHANGE **
-#'
+#' @param beta1 Vector of observed means
+#' @param var1 Vector of observed variances
+#' @param threshold Sets the value at which the border is set
+#' @param beta0 Vector or value of prior means. Default is  0
+#' @param n Number of steps between 0.33333 and 0.99999
 #' @return Object of class "BSfactor" which contains a matrix of final posterior model probabilities, a matrix of prior model probabilities,
 #' the 'boundary' and which hypothesis is being considered.
-#' @seealso \code{\link{make.BFcombo}}
+#'
+#' @seealso \code{\link{plot.BSfactor}, \link{seq}}
 #'
 #' @examples
 #' x <- BSfactor( beta1 = c(0.068,-0.084,0.175,0.337), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0 )

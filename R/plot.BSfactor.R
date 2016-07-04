@@ -1,19 +1,18 @@
-#' @title Plot of Bayes Safety factor results
+#' @title Plot Bayes Safety factor results
 #'
-#' @description Produces a visualisation of the Bayes safety factor results
+#' @description Produces a visualisation of the Bayes safety factor results.
 #'
-#' @details There is a line for each hypothesis, the x-axis is of the prior model proability for the null hypothesis,
-#' the y-axis is the posterior model probability.
+#' @details Each solid line is a hypothesis, the x-axis is of the prior model proability for the null hypothesis,
+#' the y-axis is the posterior model probability. The dotted line is the threshold.
 #'
-#'
-#' @param BSfactor A object of the class BSfactor.
+#' @param BSfactor A object of the class BSfactor
+#' @param threshold Value of the threshold used to set the border, defualt is 0.95
 #'
 #' @return Plot of posterior model probabilities in relation to changes in the prior model probabilities.
-#' @seealso \code{\link{calculate.PMP}}
+#' @seealso \code{\link{BSfactor}}
 #'
 #' @examples
-#'
-#' x <- calculate.PMP( beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, pi0 = rep(1/3,3) )
+#' x <- BSfactor( beta1 = c(0.068,-0.084,0.175,0.337), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0 )
 #' plot(x)
 
 plot.BSfactor<- function(BSfactor,threshold = 0.95){

@@ -10,11 +10,10 @@
 #' @param Percent Sets the confidence interval. Default is 99.
 #'
 #' @return Plot of Prior and observed confidence intervals.
-#' @seealso \code{\link{make_BFcombo}}
+#' @seealso \code{\link{calculate.PMP}}
 #'
 #' @examples
-#' # High values are desirable
-#' x <- make_BFcombo( beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, pi0 = rep(1/3,3) )
+#' x <- calculate.PMP( beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, pi0 = rep(1/3,3) )
 #' plot(x)
 
 plot.BFcombo<-function(BFcombo,percent = 99){
