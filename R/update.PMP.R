@@ -9,10 +9,12 @@
 #' @param BFcombo An object of class BFcombo
 #'
 #' @return Object of class BFcombo which contains a matrix of posterior model probabilities for each updated step.
-#' @seealso \code{\link{pi0.to.1} \link{ calculate.PMP}}
+#' @seealso \code{\link{pi0.to.1} \link{calculate.PMP}}
 #'
 #' @examples
-#' x <- prior.var( beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, pi0 = rep(1/3,3))
+#' x <- prior.var( beta1 = c(0.090,0.140,1.090,1.781),
+#'      var1 = c(0.000841,0.002916,0.008649,0.032041),
+#'      beta0 = 0, pi0 = rep(1/3,3))
 #' x <- u.post.param(x)
 #' x <- unconstrained.BF(x,1000)
 #' x <- update.PMP(x)
@@ -45,16 +47,3 @@ update.PMP<- function(BFcombo){
 
 }
 
-#' @rdname  This function calculates the posterior model probabilities given the prior model probabilities
-#' and the unconstrained Bayes factors.
-#'
-#' @param pi0 Vector of prior model probabilities.
-#' @param BF Vector of Bayes factors which correspond to the prior model probabilities.
-
-
-pi0.to.1<- function(pi0,BF){
-  # Pi0 are the prior Model Probabilities and BF are the Bayes factors BF.mu for a single study
-
-  out<- (pi0*BF) / sum(pi0*BF)
-  out
-}
