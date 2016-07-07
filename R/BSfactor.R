@@ -2,27 +2,29 @@
 #'
 #' @description Calculates how much can the prior model probability be weighted to the null hypothesis.
 #'
-#' @details Breaks the weights from the probability being 1/3 for each hypothesis to incrementally give the
-#' null hypothisis more weight.
-#'
+#' @details Incrementally increases a the prior posterior probability for a given hypothesis, and shows the resulting posterior
+#' model probabilities
 #'
 #' @param beta1 Vector of observed means
 #' @param var1 Vector of observed variances
 #' @param threshold Sets the value at which the border is set
 #' @param beta0 Vector or value of prior means. Default is  0
 #' @param n Number of steps between 0.33333 and 0.99999
+#' @param hypothesis Parameter has different functionalities depending on value of reverse
 #' @param reverse Changes the hypothesis in which the prior model probability increases. If this is TRUE then the value of the hypothesis parameter will determine the
-#' hypothesis which will increase in probability.
+#' hypothesis which will increase in probability
 #'
 #' @return Object of class "BSfactor" which contains a matrix of final posterior model probabilities, a matrix of prior model probabilities,
-#' the 'boundary' and which hypothesis is being considered.
+#' the 'boundary' and which hypothesis is being considered
 #'
 #' @seealso \code{\link{plot.BSfactor}, \link{seq}}
 #'
 #' @examples
-#' x <- BSfactor( beta1 = c(0.068,-0.084,0.175,0.337), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0 )
+#' x <- BSfactor( beta1 = c(0.068,-0.084,0.175,0.337),
+#'      var1 = c(0.000841,0.002916,0.008649,0.032041),
+#'      beta0 = 0 )
 
-BSfactor <- function(beta1, var1,threshold = 0.95, beta0 = 0, n = 100, hypothesis = 1, reverse = FALSE){
+BSfactor<- function(beta1, var1, threshold = 0.95, beta0 = 0, n = 100, hypothesis = 1, reverse = FALSE){
 
   values <- seq(0.33333, 0.99999,length.out = n)
 
@@ -48,7 +50,10 @@ BSfactor <- function(beta1, var1,threshold = 0.95, beta0 = 0, n = 100, hypothesi
     if(hypothesis == 2 & output[1,3] < threshold){
       warning("The probability for the hypothesis H:< is not greater than threshold at the first step")
     } else if(sum(round(output[,1+hypothesis], digits = 2) == threshold) > 0){
-      boundary<- priors[round(output[,1+hypothesis], digits = 2) == threshold,][1,]
+      boundary<- priors[round(output[,1+hypothesis], digits = 2) == threshold,]
+      if(sum(round(output[,1+hypothesis], digits = 2) == threshold) > 1 ){
+        boundary<- boundary[1,]
+      }
     } else{
       warning("Not rounding to threshold , boundary = NULL")
       boundary<- NULL
@@ -78,11 +83,11 @@ BSfactor <- function(beta1, var1,threshold = 0.95, beta0 = 0, n = 100, hypothesi
 
     }
 
-
-
-
     if(sum(round(output[,1+hypothesis], digits = 2) == threshold) > 0){
-      boundary<- priors[round(output[,1+hypothesis], digits = 2) == threshold,][1,]
+      boundary<- priors[round(output[,1+hypothesis], digits = 2) == threshold,]
+      if(sum(round(output[,1+hypothesis], digits = 2) == threshold) > 1 ){
+        boundary<- boundary[1,]
+      }
     } else{
       warning("Not rounding to threshold , boundary = NULL")
       boundary<- NULL
