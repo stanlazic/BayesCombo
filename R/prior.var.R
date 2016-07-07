@@ -5,13 +5,19 @@
 #' confidence interval of the observed values.
 #'
 #'
-#'@inheritParams plot.BFcombo
+#' @param beta1 Vector of observed means
+#' @param var1 Vector of observed variances
+#' @param pi0 Vector of prior model probabilities
+#' @param beta0 Vector or value of prior means (usually 0)
+#' @param percent Confidence interval precentage
 #'
 #' @return vector of equal length to that of the observed variances.
 #' @seealso \code{\link{make.BFcombo}}
 #'
 #' @examples
-#' x<- PriorVar( beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, pi0 = rep(1/3,3))
+#' x<- prior.var( beta1 = c(0.090,0.140,1.090,1.781),
+#'  var1 = c(0.000841,0.002916,0.008649,0.032041),
+#'  beta0 = 0, pi0 = rep(1/3,3))
 #'
 prior.var<- function(beta1, var1, beta0, pi0, percent = 99){
   if(is.numeric(beta1) != TRUE){
@@ -52,16 +58,3 @@ prior.var<- function(beta1, var1, beta0, pi0, percent = 99){
 
 }
 
-#' @rdname This function creates the BFcombo class from the inputs.
-#'
-#' @param beta1 Vector of observed means.
-#' @param var1 Vector of observed variances.
-#' @param beta0 Value of prior mean (usually 0)
-#' @param pi0 Vector of prior model probabilities.
-#'
-make.BFcombo<- function(beta1, var1, beta0, pi0){
-  BFcombo<- structure(list(beta1 = beta1, var1 = var1,
-                           beta0 = beta0, pi0 = pi0 ), class = "BFcombo")
-  BFcombo
-
-}
