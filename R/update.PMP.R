@@ -11,16 +11,17 @@
 #' @return Object of class BFcombo which contains a matrix of posterior model probabilities for each updated step.
 #' @seealso \code{\link{pi0.to.1} \link{calculate.PMP}}
 #'
+#' @export
 #' @examples
 #' x <- prior.var( beta1 = c(0.090,0.140,1.090,1.781),
 #'      var1 = c(0.000841,0.002916,0.008649,0.032041),
 #'      beta0 = 0, pi0 = rep(1/3,3))
 #' x <- u.post.param(x)
 #' x <- unconstrained.BF(x,1000)
-#' x <- update.PMP(x)
+#' x <- PMP.update(x)
 #'
 
-update.PMP<- function(BFcombo){
+PMP.update<- function(BFcombo){
   if(any(names(BFcombo) == "BFmu")){
     pmp.t<- BFcombo$BFmu
     bfcols<- ncol(BFcombo$BFmu)

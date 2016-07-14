@@ -6,10 +6,12 @@
 #'
 #' @param n Number of times the distributions are sampled
 #' @param prior.mean Vector of unconstrained prior  model means. This is part of the BFcombo object
-#' @param posterior.mean Vector of unconstrained posterior model means. This is part of the BFcombo object
 #' @param prior.sd Vector of unconstrained prior model standard devidations. The variances are part of the BFcombo object
-#' @param prior.mean Vector of unconstrained prior model standard devidations, The variances are part of the BFcombo object
+#' @param posterior.mean Vector of unconstrained posterior model means. This is part of the BFcombo object
+#' @param posterior.sd Vector of unconstrained posterior model standard devidations, The variances are part of the BFcombo object
+#' @param hypothesis Choose the hypothesis to sample from
 #'
+#' @export
 #' @seealso \code{\link{unconstrained.BF}}
 
 sample.prop<- function(n,prior.mean,posterior.mean,prior.sd,posterior.sd,hypothesis = 1){

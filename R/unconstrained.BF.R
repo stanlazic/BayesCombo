@@ -12,6 +12,7 @@
 #' @return Object of class BFcombo which contains the values for the unconstrained Bayes factors for each hypothesis.
 #' @seealso \code{\link{sample.prop}}
 #'
+#' @export
 #' @examples
 #' x <- prior.var( beta1 = c(0.090,0.140,1.090,1.781),
 #'      var1 = c(0.000841,0.002916,0.008649,0.032041),

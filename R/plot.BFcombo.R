@@ -3,20 +3,22 @@
 #' @description Produces a visualisation of prior variances by plotting the confidence intervals around the
 #'  prior mean and also shows the observed means and variances as confidence intervals.
 #'
-#' @details
-#'
 #'
 #' @param BFcombo A object of the class BFcombo (see make_BFcombo).
-#' @param Percent Sets the confidence interval. Default is 99.
+#' @param percent Sets the percentage of the confidence interval. Default is 99.
+#' @param ... other graphical parameters
 #'
 #' @return Plot of Prior and observed confidence intervals.
 #' @seealso \code{\link{calculate.PMP}}
 #'
+#' @export
 #' @examples
-#' x <- calculate.PMP( beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, pi0 = rep(1/3,3) )
+#' x <- calculate.PMP( beta1 = c(0.090,0.140,1.090,1.781),
+#'     var1 = c(0.000841,0.002916,0.008649,0.032041),
+#'     beta0 = 0, pi0 = rep(1/3,3) )
 #' plot(x)
 
-plot.BFcombo<-function(BFcombo,percent = 99){
+plot.BFcombo<-function(BFcombo,percent = 99, ... ){
   #Setup
   n.studies<- length(BFcombo$beta1)
   data<- matrix(0, ncol = 2 , nrow = n.studies)
@@ -41,7 +43,7 @@ plot.BFcombo<-function(BFcombo,percent = 99){
 
   ## ggplot
 
-  p<- ggplot(data, aes(X1,y1))
+  p<- ggplot(data, aes(X1,y1 , ...))
   p<- p + geom_point(aes(X1,y1), shape = 124,size = 4) + geom_point(aes(X2,y1),shape = 124,size = 4)
   p<- p + geom_vline(xintercept = 0,linetype = 2 )
   p<- p + geom_segment(aes(x =X1, y = y1 , xend = X2, yend = y1))

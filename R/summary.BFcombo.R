@@ -9,10 +9,13 @@
 #'
 #' @return A summary of the BFcombo object passed.
 #'
-#' @seealso \code{\link{make_BFcombo} \link{PriorVar}}
+#' @seealso \code{\link{make.BFcombo} \link{prior.var}}
 #'
+#' @export
 #' @examples
-#' x <- calculate.PMP( beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, pi0 = rep(1/3,3))
+#' x <- calculate.PMP( beta1 = c(0.090,0.140,1.090,1.781),
+#'      var1 = c(0.000841,0.002916,0.008649,0.032041),
+#'      beta0 = 0, pi0 = rep(1/3,3))
 #' summary(x)
 
 

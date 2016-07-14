@@ -11,8 +11,11 @@
 #'
 #' @seealso \code{\link{prior.var}}
 #'
+#' @export
 #' @examples
-#' x <- prior.var(beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, pi0 = rep(1/3,3) )beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, pi0 = rep(1/3,3) )
+#' x <- prior.var(beta1 = c(0.090,0.140,1.090,1.781),
+#'      var1 = c(0.000841,0.002916,0.008649,0.032041),
+#'      beta0 = 0, pi0 = rep(1/3,3) )
 #' x <- u.post.param(x)
 
 u.post.param<- function(BFcombo){
@@ -28,7 +31,7 @@ u.post.param<- function(BFcombo){
     return(BFcombo)
   } else {
     if(class(BFcombo) != "BFcombo"){
-      stop("Input not of BFcombo class please use make.BFcombo")
+      stop("Input not of BFcombo class please run prior.var function")
     }else{
       stop("Unconstrained prior variances not found. Please run prior.var function")
     }

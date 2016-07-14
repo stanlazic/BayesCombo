@@ -6,13 +6,18 @@
 #' hypothesis.
 #'
 #' @param BFcombo A object of the class BFcombo which contains the PMP section
+#' @param pi0 Vector of prior model probabilities
 #'
 #' @return Plot of posterior model probabilities.
 #'
 #' @seealso \code{\link{calculate.PMP}}
 #'
+#' @export
+#'
 #' @examples
-#' x <- calculate.PMP( beta1 = c(0.090,0.140,1.090,1.781), var1 = c(0.000841,0.002916,0.008649,0.032041), beta0 = 0, pi0 = rep(1/3,3) )
+#' x <- calculate.PMP( beta1 = c(0.090,0.140,1.090,1.781),
+#'        var1 = c(0.000841,0.002916,0.008649,0.032041),
+#'        beta0 = 0, pi0 = rep(1/3,3) )
 #' PMP.plot(x)
 
 PMP.plot<- function(BFcombo,pi0 = rep(1/3,3)){

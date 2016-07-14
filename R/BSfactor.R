@@ -14,15 +14,20 @@
 #' @param reverse Changes the hypothesis in which the prior model probability increases. If this is TRUE then the value of the hypothesis parameter will determine the
 #' hypothesis which will increase in probability
 #'
+#'
 #' @return Object of class "BSfactor" which contains a matrix of final posterior model probabilities, a matrix of prior model probabilities,
 #' the 'boundary' and which hypothesis is being considered
 #'
-#' @seealso \code{\link{plot.BSfactor}, \link{seq}}
-#'
+#' @export
 #' @examples
+#'
 #' x <- BSfactor( beta1 = c(0.068,-0.084,0.175,0.337),
 #'      var1 = c(0.000841,0.002916,0.008649,0.032041),
 #'      beta0 = 0 )
+#'
+#' @seealso \code{\link{plot.BSfactor}, \link{seq}}
+#'
+
 
 BSfactor<- function(beta1, var1, threshold = 0.95, beta0 = 0, n = 100, hypothesis = 1, reverse = FALSE){
 
@@ -95,4 +100,5 @@ BSfactor<- function(beta1, var1, threshold = 0.95, beta0 = 0, n = 100, hypothesi
     return( structure(list(PMP = output, priorMP = priors, boundary = boundary, hypothesis = hypothesis ),class = "BSfactor"))
   }
 }
+
 

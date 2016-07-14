@@ -10,7 +10,8 @@
 #' @param BF Vector of Bayes factors which correspond to the prior model probabilities
 #' @param pi0 Vector of prior model probabilities
 #'
-#' @seealso \code{\link{update.PMP}}
+#' @export
+#' @seealso \code{\link{PMP.update}}
 
 
 pi0.to.1<- function(pi0,BF){

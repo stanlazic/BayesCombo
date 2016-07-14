@@ -9,6 +9,7 @@
 #' @param beta0 Value of prior mean (usually 0)
 #' @param pi0 Vector of prior model probabilities
 #'
+#' @export
 #' @seealso \code{\link{prior.var}}
 
 make.BFcombo<- function(beta1, var1, beta0, pi0){
