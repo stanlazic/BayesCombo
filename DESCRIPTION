@@ -13,7 +13,8 @@ License: GPL-3
 LazyData: true
 Suggests:
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 0.7.1.99)
 URL: https://github.com/stanlazic/BayesCombo
 BugReports: https://github.com/stanlazic/BayesCombo/issues
 VignetteBuilder: knitr
