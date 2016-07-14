@@ -35,6 +35,6 @@ x <- calculate.PMP( beta1 = c(0.090,0.140,1.090,1.781),
        beta0 = 0, pi0 = rep(1/3,3))
 }
 \seealso{
-\code{\link{prior.var} \link{u.post.param} \link{unconstrained.BF} \link{update.PMP}}
+\code{\link{prior.var} \link{u.post.param} \link{unconstrained.BF} \link{PMP.update}}
 }
 

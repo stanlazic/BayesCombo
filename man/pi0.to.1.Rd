@@ -21,6 +21,6 @@ model probabilities
 This function is called from within the update.PMP function
 }
 \seealso{
-\code{\link{update.PMP}}
+\code{\link{PMP.update}}
 }
 

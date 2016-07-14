@@ -4,12 +4,14 @@
 \alias{plot.BFcombo}
 \title{Plot of Prior Variances given Observed Means and Variances}
 \usage{
-\method{plot}{BFcombo}(BFcombo, percent = 99)
+\method{plot}{BFcombo}(BFcombo, percent = 99, ...)
 }
 \arguments{
 \item{BFcombo}{A object of the class BFcombo (see make_BFcombo).}
 
 \item{percent}{Sets the percentage of the confidence interval. Default is 99.}
+
+\item{...}{other graphical parameters}
 }
 \value{
 Plot of Prior and observed confidence intervals.
@@ -20,8 +22,8 @@ Produces a visualisation of prior variances by plotting the confidence intervals
 }
 \examples{
 x <- calculate.PMP( beta1 = c(0.090,0.140,1.090,1.781),
-       var1 = c(0.000841,0.002916,0.008649,0.032041),
-       beta0 = 0, pi0 = rep(1/3,3) )
+    var1 = c(0.000841,0.002916,0.008649,0.032041),
+    beta0 = 0, pi0 = rep(1/3,3) )
 plot(x)
 }
 \seealso{

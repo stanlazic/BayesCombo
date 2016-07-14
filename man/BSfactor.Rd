@@ -35,9 +35,11 @@ Incrementally increases a the prior posterior probability for a given hypothesis
 model probabilities
 }
 \examples{
+
 x <- BSfactor( beta1 = c(0.068,-0.084,0.175,0.337),
      var1 = c(0.000841,0.002916,0.008649,0.032041),
      beta0 = 0 )
+
 }
 \seealso{
 \code{\link{plot.BSfactor}, \link{seq}}
