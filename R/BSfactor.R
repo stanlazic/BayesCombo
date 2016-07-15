@@ -29,7 +29,7 @@
 #'
 
 
-BSfactor<- function(beta1, var1, threshold = 0.95, beta0 = 0, n = 100, hypothesis = 1, reverse = FALSE){
+BSfactor<- function(beta1, var1, beta0 = 0, n = 100, threshold = 0.95, hypothesis = 1, reverse = FALSE){
 
   values <- seq(0.33333, 0.99999,length.out = n)
 
@@ -63,7 +63,7 @@ BSfactor<- function(beta1, var1, threshold = 0.95, beta0 = 0, n = 100, hypothesi
       warning("Not rounding to threshold , boundary = NULL")
       boundary<- NULL
     }
-    return( structure(list(PMP = output, priorMP = priors, boundary = boundary, hypothesis = hypothesis ),class = "BSfactor"))
+    return( structure(list(PMP = output, priorMP = priors, boundary = boundary, hypothesis = hypothesis, threshold = threshold ),class = "BSfactor"))
   }else{
 
     if(hypothesis == 1){
@@ -97,7 +97,7 @@ BSfactor<- function(beta1, var1, threshold = 0.95, beta0 = 0, n = 100, hypothesi
       warning("Not rounding to threshold , boundary = NULL")
       boundary<- NULL
     }
-    return( structure(list(PMP = output, priorMP = priors, boundary = boundary, hypothesis = hypothesis ),class = "BSfactor"))
+    return( structure(list(PMP = output, priorMP = priors, boundary = boundary,threshold = threshold , hypothesis = hypothesis),class = "BSfactor"))
   }
 }
 

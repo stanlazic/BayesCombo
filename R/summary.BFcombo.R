@@ -5,7 +5,8 @@
 #' @details For all the sections which provide a mean or variance vector, the summary function will return a minimum and maximim value.
 #' For a Bayes factor or probability, the summary function will return a matrix with the values rounded to 4 decimal points.
 #'
-#' @param BFcombo A object of the class BFcombo
+#' @param object A object of the class BFcombo
+#' @param ... Additional parameters
 #'
 #' @return A summary of the BFcombo object passed.
 #'
@@ -19,16 +20,16 @@
 #' summary(x)
 
 
-summary.BFcombo<- function(BFcombo){
+summary.BFcombo<- function(object, ...){
   # get categories
-  categ<- names(BFcombo)
+  categ<- names(object)
 
   if (all( categ != "var1")){
     output<- list(Observed = NULL)
-    warning("Only BFcombo inputs included")
+    warning("Only object inputs included")
 
-    Min_Obs<- round(c(min(BFcombo$beta1),min(BFcombo$var1)),digits = 4)
-    Max_Obs<- round(c(max(BFcombo$beta1),max(BFcombo$var1)),digits = 4)
+    Min_Obs<- round(c(min(object$beta1),min(object$var1)),digits = 4)
+    Max_Obs<- round(c(max(object$beta1),max(object$var1)),digits = 4)
 
     output$Observed<- data.frame(Min = Min_Obs , Max = Max_Obs)
     rownames(output$Observed)<- c("Mean","Variance")
@@ -36,8 +37,8 @@ summary.BFcombo<- function(BFcombo){
 
     output<- list(Observed = NULL, uPrior = NULL)
 
-    Min_Obs<- round(c(min(BFcombo$beta1),min(BFcombo$var1)),digits = 4)
-    Max_Obs<- round(c(max(BFcombo$beta1),max(BFcombo$var1)),digits = 4)
+    Min_Obs<- round(c(min(object$beta1),min(object$var1)),digits = 4)
+    Max_Obs<- round(c(max(object$beta1),max(object$var1)),digits = 4)
 
     output$Observed<- data.frame(Min = Min_Obs , Max = Max_Obs)
     rownames(output$Observed)<- c("Mean","Variance")
@@ -45,8 +46,8 @@ summary.BFcombo<- function(BFcombo){
     ###
 
 
-    Min_uPrior<- round(c(min(BFcombo$beta0),min(BFcombo$var0)),digits = 4)
-    Max_uVariance<- round(c(max(BFcombo$beta0),max(BFcombo$var0)),digits = 4)
+    Min_uPrior<- round(c(min(object$beta0),min(object$var0)),digits = 4)
+    Max_uVariance<- round(c(max(object$beta0),max(object$var0)),digits = 4)
 
     output$Observed<- data.frame(Min = Min_Obs , Max = Max_Obs)
     rownames(output$Observed)<- c("Mean","Variance")
@@ -57,16 +58,16 @@ summary.BFcombo<- function(BFcombo){
   } else if (all( categ != "BFmu")){
     output<- list(Observed = NULL, uPrior = NULL, uPosterior = NULL)
 
-    Min_Obs<- round(c(min(BFcombo$beta1),min(BFcombo$var1)),digits = 4)
-    Max_Obs<- round(c(max(BFcombo$beta1),max(BFcombo$var1)),digits = 4)
+    Min_Obs<- round(c(min(object$beta1),min(object$var1)),digits = 4)
+    Max_Obs<- round(c(max(object$beta1),max(object$var1)),digits = 4)
 
 
-    Min_uPrior<- round(c(min(BFcombo$beta0),min(BFcombo$var0)),digits = 4)
-    Max_uVariance<- round(c(max(BFcombo$beta0),max(BFcombo$var0)),digits = 4)
+    Min_uPrior<- round(c(min(object$beta0),min(object$var0)),digits = 4)
+    Max_uVariance<- round(c(max(object$beta0),max(object$var0)),digits = 4)
 
 
-    Min_uPosterior<- round(c(min(BFcombo$unBetaPost),min(BFcombo$unVarPost)),digits = 4)
-    Max_uPostVariance<- round(c(max(BFcombo$unBetaPost),max(BFcombo$unVarPost)),digits = 4)
+    Min_uPosterior<- round(c(min(object$unBetaPost),min(object$unVarPost)),digits = 4)
+    Max_uPostVariance<- round(c(max(object$unBetaPost),max(object$unVarPost)),digits = 4)
 
     output$Observed<- data.frame(Min = Min_Obs , Max = Max_Obs)
     rownames(output$Observed)<- c("Mean","Variance")
@@ -81,18 +82,18 @@ summary.BFcombo<- function(BFcombo){
 
     output<- list(Observed = NULL, uPrior = NULL, uPosterior = NULL,BFmu = NULL)
 
-    Min_Obs<- round(c(min(BFcombo$beta1),min(BFcombo$var1)),digits = 4)
-    Max_Obs<- round(c(max(BFcombo$beta1),max(BFcombo$var1)),digits = 4)
+    Min_Obs<- round(c(min(object$beta1),min(object$var1)),digits = 4)
+    Max_Obs<- round(c(max(object$beta1),max(object$var1)),digits = 4)
 
 
-    Min_uPrior<- round(c(min(BFcombo$beta0),min(BFcombo$var0)),digits = 4)
-    Max_uVariance<- round(c(max(BFcombo$beta0),max(BFcombo$var0)),digits = 4)
+    Min_uPrior<- round(c(min(object$beta0),min(object$var0)),digits = 4)
+    Max_uVariance<- round(c(max(object$beta0),max(object$var0)),digits = 4)
 
 
-    Min_uPosterior<- round(c(min(BFcombo$unBetaPost),min(BFcombo$unVarPost)),digits = 4)
-    Max_uPostVariance<- round(c(max(BFcombo$unBetaPost),max(BFcombo$unVarPost)),digits = 4)
+    Min_uPosterior<- round(c(min(object$unBetaPost),min(object$unVarPost)),digits = 4)
+    Max_uPostVariance<- round(c(max(object$unBetaPost),max(object$unVarPost)),digits = 4)
 
-    output$BFmu <- round(BFcombo$BFmu,digits = 4)
+    output$BFmu <- round(object$BFmu,digits = 4)
 
     output$Observed<- data.frame(Min = Min_Obs , Max = Max_Obs)
     rownames(output$Observed)<- c("Mean","Variance")
@@ -107,20 +108,20 @@ summary.BFcombo<- function(BFcombo){
   } else if(any(categ == "PMP")){
     output<- list(Observed = NULL, uPrior = NULL, uPosterior = NULL,BFmu = NULL, PMP = NULL)
 
-    Min_Obs<- round(c(min(BFcombo$beta1),min(BFcombo$var1)),digits = 4)
-    Max_Obs<- round(c(max(BFcombo$beta1),max(BFcombo$var1)),digits = 4)
+    Min_Obs<- round(c(min(object$beta1),min(object$var1)),digits = 4)
+    Max_Obs<- round(c(max(object$beta1),max(object$var1)),digits = 4)
 
 
-    Min_uPrior<- round(c(min(BFcombo$beta0),min(BFcombo$var0)),digits = 4)
-    Max_uVariance<- round(c(max(BFcombo$beta0),max(BFcombo$var0)),digits = 4)
+    Min_uPrior<- round(c(min(object$beta0),min(object$var0)),digits = 4)
+    Max_uVariance<- round(c(max(object$beta0),max(object$var0)),digits = 4)
 
 
-    Min_uPosterior<- round(c(min(BFcombo$unBetaPost),min(BFcombo$unVarPost)),digits = 4)
-    Max_uPostVariance<- round(c(max(BFcombo$unBetaPost),max(BFcombo$unVarPost)),digits = 4)
+    Min_uPosterior<- round(c(min(object$unBetaPost),min(object$unVarPost)),digits = 4)
+    Max_uPostVariance<- round(c(max(object$unBetaPost),max(object$unVarPost)),digits = 4)
 
-    output$BFmu <- round(BFcombo$BFmu,digits = 4)
+    output$BFmu <- round(object$BFmu,digits = 4)
 
-    output$PMP <- round(BFcombo$PMP,digits = 4)
+    output$PMP <- round(object$PMP,digits = 4)
 
     output$Observed<- data.frame(Min = Min_Obs , Max = Max_Obs)
     rownames(output$Observed)<- c("Mean","Variance")

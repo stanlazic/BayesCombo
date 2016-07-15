@@ -11,6 +11,7 @@
 #' @param beta0 Vector or value of prior means (usually 0)
 #' @param n Number of times distributions are sampled
 #' @param var.mult Multiplier of the prior variances
+#' @param percent Sets the percentage of the confidence interval. Default is 99.
 #'
 #' @return Object of class BFcombo which contains a matrix of posterior model probabilities for each updated step.
 #' @seealso \code{\link{prior.var} \link{u.post.param} \link{unconstrained.BF} \link{PMP.update}}
@@ -22,9 +23,10 @@
 #'        beta0 = 0, pi0 = rep(1/3,3))
 
 
-calculate.PMP <- function(beta1, var1,pi0,beta0, n = 10000, var.mult = 1){
+calculate.PMP <- function(beta1, var1,pi0,beta0, n = 10000, var.mult = 1, percent = 99){
 
-  BFcombo <- prior.var(beta1 = beta1, var1 = var1, beta0 = beta0, pi0 = pi0)
+  BFcombo <- prior.var(beta1 = beta1, var1 = var1, beta0 = beta0, pi0 = pi0,99)
+  BFcombo$percent <- percent
   BFcombo$var0 <- BFcombo$var0 * var.mult
   BFcombo <- u.post.param(BFcombo)
   BFcombo <- unconstrained.BF(BFcombo,n)
