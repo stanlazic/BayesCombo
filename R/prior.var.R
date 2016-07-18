@@ -12,7 +12,6 @@
 #' @param percent Confidence interval precentage
 #'
 #' @return vector of equal length to that of the observed variances.
-#' @seealso \code{\link{make.BFcombo}}
 #'
 #' @export
 #' @examples
@@ -22,6 +21,8 @@
 #'
 
 prior.var<- function(beta1, var1, beta0, pi0, percent = 99){
+
+
   if(is.numeric(beta1) != TRUE){
     stop("beta1 is not numeric")
   }
@@ -40,7 +41,8 @@ prior.var<- function(beta1, var1, beta0, pi0, percent = 99){
     stop("Prior model probabilities do not sum to 1")
   }
 
-  BFcombo<- make.BFcombo(beta1,var1,beta0,pi0)
+  BFcombo<- structure(list(beta1 = beta1, var1 = var1,
+                                      beta0 = beta0, pi0 = pi0 ), class = "BFcombo")
     #setup
     percent<- (percent / 100)
     percent<- percent + (1-percent)/2
