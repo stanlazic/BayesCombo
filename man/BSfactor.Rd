@@ -4,7 +4,7 @@
 \alias{BSfactor}
 \title{Calculate Bayes Safety factor}
 \usage{
-BSfactor(beta1, var1, threshold = 0.95, beta0 = 0, n = 100,
+BSfactor(beta1, var1, beta0 = 0, n = 100, threshold = 0.95,
   hypothesis = 1, reverse = FALSE)
 }
 \arguments{
@@ -12,11 +12,11 @@ BSfactor(beta1, var1, threshold = 0.95, beta0 = 0, n = 100,
 
 \item{var1}{Vector of observed variances}
 
-\item{threshold}{Sets the value at which the border is set}
-
 \item{beta0}{Vector or value of prior means. Default is  0}
 
 \item{n}{Number of steps between 0.33333 and 0.99999}
+
+\item{threshold}{Sets the value at which the border is set}
 
 \item{hypothesis}{Parameter has different functionalities depending on value of reverse}
 

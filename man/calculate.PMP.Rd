@@ -4,7 +4,8 @@
 \alias{calculate.PMP}
 \title{Calculate updated Posterior Model Proababilities}
 \usage{
-calculate.PMP(beta1, var1, pi0, beta0, n = 10000, var.mult = 1)
+calculate.PMP(beta1, var1, pi0, beta0, n = 10000, var.mult = 1,
+  percent = 99)
 }
 \arguments{
 \item{beta1}{Vector of observed means}
@@ -18,6 +19,8 @@ calculate.PMP(beta1, var1, pi0, beta0, n = 10000, var.mult = 1)
 \item{n}{Number of times distributions are sampled}
 
 \item{var.mult}{Multiplier of the prior variances}
+
+\item{percent}{Sets the percentage of the confidence interval. Default is 99.}
 }
 \value{
 Object of class BFcombo which contains a matrix of posterior model probabilities for each updated step.

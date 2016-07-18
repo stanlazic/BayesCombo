@@ -4,14 +4,12 @@
 \alias{plot.BSfactor}
 \title{Plot Bayes Safety factor results}
 \usage{
-\method{plot}{BSfactor}(BSfactor, threshold = 0.95, ...)
+\method{plot}{BSfactor}(x, ...)
 }
 \arguments{
-\item{BSfactor}{A object of the class BSfactor}
+\item{x}{object of the class BSfactor}
 
-\item{threshold}{Value of the threshold used to set the border, defualt is 0.95}
-
-\item{...}{other graphical parameters}
+\item{...}{additional parameters not required}
 }
 \value{
 Plot of posterior model probabilities in relation to changes in the prior model probabilities.

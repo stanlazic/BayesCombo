@@ -4,10 +4,12 @@
 \alias{summary.BFcombo}
 \title{Summarize a BFcombo object}
 \usage{
-\method{summary}{BFcombo}(BFcombo)
+\method{summary}{BFcombo}(object, ...)
 }
 \arguments{
-\item{BFcombo}{A object of the class BFcombo}
+\item{object}{A object of the class BFcombo}
+
+\item{...}{Additional parameters}
 }
 \value{
 A summary of the BFcombo object passed.
@@ -26,6 +28,6 @@ x <- calculate.PMP( beta1 = c(0.090,0.140,1.090,1.781),
 summary(x)
 }
 \seealso{
-\code{\link{make.BFcombo} \link{prior.var}}
+\code{ \link{calculate.PMP} \link{prior.var}}
 }
 

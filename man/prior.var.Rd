@@ -27,13 +27,4 @@ Given a set of values for the observed mean,variance and the prior mean, a set o
 The prior varianes are calculated by getting the largest confidence interval from the prior mean by using the
 confidence interval of the observed values.
 }
-\examples{
-x<- prior.var( beta1 = c(0.090,0.140,1.090,1.781),
- var1 = c(0.000841,0.002916,0.008649,0.032041),
- beta0 = 0, pi0 = rep(1/3,3))
-
-}
-\seealso{
-\code{\link{make.BFcombo}}
-}
 

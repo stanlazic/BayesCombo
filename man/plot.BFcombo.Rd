@@ -4,14 +4,12 @@
 \alias{plot.BFcombo}
 \title{Plot of Prior Variances given Observed Means and Variances}
 \usage{
-\method{plot}{BFcombo}(BFcombo, percent = 99, ...)
+\method{plot}{BFcombo}(x, ...)
 }
 \arguments{
-\item{BFcombo}{A object of the class BFcombo (see make_BFcombo).}
+\item{x}{A object of the class BFcombo (see make_BFcombo)}
 
-\item{percent}{Sets the percentage of the confidence interval. Default is 99.}
-
-\item{...}{other graphical parameters}
+\item{...}{additional parameters not required}
 }
 \value{
 Plot of Prior and observed confidence intervals.

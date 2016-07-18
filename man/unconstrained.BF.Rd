@@ -22,14 +22,7 @@ Using the unconstained prior and posterior models, the unconstrained Bayes facto
 The unconstrained Bayes factors are calculated using proportions calculated by sampling
  the distributions of the unconstrained prior and posterior models. This function calls upon a sampling function sample.prop.
 }
-\examples{
-x <- prior.var( beta1 = c(0.090,0.140,1.090,1.781),
-     var1 = c(0.000841,0.002916,0.008649,0.032041),
-     beta0 = 0, pi0 = rep(1/3,3))
-x <- u.post.param(x)
-x <- unconstrained.BF(x,1000)
-}
 \seealso{
-\code{\link{sample.prop}}
+\code{\link{PMP.update}}
 }
 
