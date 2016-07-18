@@ -13,12 +13,6 @@
 #'
 #' @return vector of equal length to that of the observed variances.
 #'
-#' @export
-#' @examples
-#' x<- prior.var( beta1 = c(0.090,0.140,1.090,1.781),
-#'  var1 = c(0.000841,0.002916,0.008649,0.032041),
-#'  beta0 = 0, pi0 = rep(1/3,3))
-#'
 
 prior.var<- function(beta1, var1, beta0, pi0, percent = 99){
 

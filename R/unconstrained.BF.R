@@ -10,15 +10,8 @@
 #' @param n Number of times the distributions are sampled
 #'
 #' @return Object of class BFcombo which contains the values for the unconstrained Bayes factors for each hypothesis.
-#' @seealso \code{\link{sample.prop}}
+#' @seealso \code{\link{PMP.update}}
 #'
-#' @export
-#' @examples
-#' x <- prior.var( beta1 = c(0.090,0.140,1.090,1.781),
-#'      var1 = c(0.000841,0.002916,0.008649,0.032041),
-#'      beta0 = 0, pi0 = rep(1/3,3))
-#' x <- u.post.param(x)
-#' x <- unconstrained.BF(x,1000)
 
 
 unconstrained.BF<- function(BFcombo,n = 1000){

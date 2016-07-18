@@ -11,7 +11,6 @@
 #' @param posterior.sd Vector of unconstrained posterior model standard devidations, The variances are part of the BFcombo object
 #' @param hypothesis Choose the hypothesis to sample from
 #'
-#' @export
 #' @seealso \code{\link{unconstrained.BF}}
 
 sample.prop<- function(n,prior.mean,posterior.mean,prior.sd,posterior.sd,hypothesis = 1){

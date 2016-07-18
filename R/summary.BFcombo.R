@@ -10,7 +10,7 @@
 #'
 #' @return A summary of the BFcombo object passed.
 #'
-#' @seealso \code{\link{make.BFcombo} \link{prior.var}}
+#' @seealso \code{ \link{calculate.PMP} \link{prior.var}}
 #'
 #' @export
 #' @examples
