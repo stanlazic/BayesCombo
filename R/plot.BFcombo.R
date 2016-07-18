@@ -44,15 +44,15 @@ plot.BFcombo<-function(x, ... ){
 
   ## ggplot
   X1 <- X2 <- NULL
-  p<- ggplot(data, aes(X1,y1 , ...))
+  p<- ggplot(data, aes(X1,y1))
   p<- p + geom_point(aes(X1,y1), shape = 124,size = 4) + geom_point(aes(X2,y1),shape = 124,size = 4)
   p<- p + geom_vline(xintercept = 0,linetype = 2 )
   p<- p + geom_segment(aes(x =X1, y = y1 , xend = X2, yend = y1))
   p<- p + geom_point(aes(X3,y2),col = "red" ,shape = 124,size = 4) + geom_point(aes(X4,y2), col = "red",shape = 124,size = 4)
   p<- p + geom_segment(aes(x =X3, y = y2 , xend = X4, yend = y2),col = "red")
   p<- p + geom_point(aes(x$beta1,y1))
-  p<- p + geom_text(aes(x$beta1,y1,label = paste("beta" , "^",1,1:n.studies,"*", "'' %+-% '' ","*", round(multiplier,3),"*","sigma","^",11:14, sep = "")),parse = TRUE,nudge_y = -0.03)
-  p<- p + geom_text(aes(rep(0,4),y2,label = paste("beta" , "^",1:n.studies,"*", "'' %+-% '' ","*", round(multiplier,3),"*","sigma","^",1:4, sep = "")),parse = TRUE,nudge_y = -0.03,col = "red")
+  p<- p + geom_text(aes(x$beta1,y1), label = paste("beta" , "^",1,1:n.studies,"*", "'' %+-% '' ","*", round(multiplier,3),"*","sigma","^",11:(10+n.studies), sep = ""),parse = TRUE,nudge_y = -0.03)
+  p<- p + geom_text(aes(rep(0,n.studies),y2),label = paste("beta" , "^",1:n.studies,"*", "'' %+-% '' ","*", round(multiplier,3),"*","sigma","^",1:n.studies, sep = ""),parse = TRUE,nudge_y = -0.03,col = "red")
   p<- p + theme(axis.ticks.y = element_blank(), axis.text.y = element_blank())
   p<- p + xlab(NULL) + ylab(NULL)
   p<- p + ggtitle("Prior Variance Selection")
