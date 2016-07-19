@@ -9,6 +9,7 @@ Description: BayesCombo implements a Method for Combining Evidence Across Multip
 Depends:
     R (>= 2.10),
     ggplot2 (>= 2.1.0)
+Imports: methods
 License: GPL-3
 LazyData: true
 Suggests:
