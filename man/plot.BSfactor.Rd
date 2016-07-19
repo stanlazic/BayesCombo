@@ -22,9 +22,9 @@ Each solid line is a hypothesis, the x-axis is of the prior model proability for
 the y-axis is the posterior model probability. The dotted line is the threshold.
 }
 \examples{
-x <- BSfactor( beta1 = c(0.068,-0.084,0.175,0.337),
-       var1 = c(0.000841,0.002916,0.008649,0.032041),
-       beta0 = 0 )
+x <- BSfactor( beta1 = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
+       var1 = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
+       beta0 = 0, reverse = TRUE )
 plot(x)
 }
 \seealso{

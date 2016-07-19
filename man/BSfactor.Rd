@@ -4,13 +4,13 @@
 \alias{BSfactor}
 \title{Calculate Bayes Safety factor}
 \usage{
-BSfactor(beta1, var1, beta0 = 0, n = 100, threshold = 0.95,
+BSfactor(beta1, var1 = NULL, beta0 = 0, n = 100, threshold = 0.95,
   hypothesis = 1, reverse = FALSE)
 }
 \arguments{
-\item{beta1}{Vector of observed means}
+\item{beta1}{Vector of observed means or an object of class "BFcombo"}
 
-\item{var1}{Vector of observed variances}
+\item{var1}{Vector of observed variances or NULL if beta1 is class "BFcombo"}
 
 \item{beta0}{Vector or value of prior means. Default is  0}
 
@@ -36,9 +36,9 @@ model probabilities
 }
 \examples{
 
-x <- BSfactor( beta1 = c(0.068,-0.084,0.175,0.337),
-     var1 = c(0.000841,0.002916,0.008649,0.032041),
-     beta0 = 0 )
+x <- BSfactor( beta1 = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
+       var1 = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
+       beta0 = 0, reverse = TRUE )
 
 }
 \seealso{

@@ -22,9 +22,9 @@ For all the sections which provide a mean or variance vector, the summary functi
 For a Bayes factor or probability, the summary function will return a matrix with the values rounded to 4 decimal points.
 }
 \examples{
-x <- calculate.PMP( beta1 = c(0.090,0.140,1.090,1.781),
-     var1 = c(0.000841,0.002916,0.008649,0.032041),
-     beta0 = 0, pi0 = rep(1/3,3))
+x <- calculate.PMP( beta1 = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
+    var1 = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
+    beta0 = 0, pi0 = rep(1/3,3) )
 summary(x)
 }
 \seealso{
