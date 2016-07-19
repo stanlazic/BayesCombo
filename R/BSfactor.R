@@ -5,8 +5,8 @@
 #' @details Incrementally increases a the prior posterior probability for a given hypothesis, and shows the resulting posterior
 #' model probabilities
 #'
-#' @param beta1 Vector of observed means
-#' @param var1 Vector of observed variances
+#' @param beta1 Vector of observed means or an object of class "BFcombo"
+#' @param var1 Vector of observed variances or NULL if beta1 is class "BFcombo"
 #' @param threshold Sets the value at which the border is set
 #' @param beta0 Vector or value of prior means. Default is  0
 #' @param n Number of steps between 0.33333 and 0.99999
@@ -17,6 +17,8 @@
 #'
 #' @return Object of class "BSfactor" which contains a matrix of final posterior model probabilities, a matrix of prior model probabilities,
 #' the 'boundary' and which hypothesis is being considered
+#'
+#' @importFrom methods is
 #'
 #' @export
 #' @examples
@@ -29,22 +31,37 @@
 #'
 
 
-BSfactor<- function(beta1, var1, beta0 = 0, n = 100, threshold = 0.95, hypothesis = 1, reverse = FALSE){
+BSfactor<- function(beta1, var1 = NULL , beta0 = 0, n = 100, threshold = 0.95, hypothesis = 1, reverse = FALSE){
+  if( class(beta1) != "BFcombo" & is.null(var1)){
+    warning("var1 is null please input object of class BFcombo or give vector of variances for var1.")
+    stop()
+  }
 
   values <- seq(0.33333, 0.99999,length.out = n)
 
   if (reverse == FALSE){
     priors <- cbind( "H=0"=values,"H:>"=(1-values)/2, "H:<"=(1-values)/2)
     tot.len <- length(priors[,1])
-    studies <- length(beta1)
     output <-priors
     output[]<- 0
+    if(is.numeric(beta1)){
+      studies <- length(beta1)
 
-    for(i in 1:tot.len){
+      for(i in 1:tot.len){
 
-      temp <- calculate.PMP(beta1, var1, beta0, pi0 = priors[i,])
-      output[i,] <- temp$PMP[,studies]
+        temp <- calculate.PMP(beta1, var1, beta0, pi0 = priors[i,])
+        output[i,] <- temp$PMP[,studies]
 
+      }
+    }else if( is(beta1,"BFcombo")){
+      studies <- length(beta1$beta1)
+
+      for(i in 1:tot.len){
+
+        temp <- calculate.PMP(beta1$beta1, beta1$var1, beta1$beta0, pi0 = priors[i,])
+        output[i,] <- temp$PMP[,studies]
+
+      }
     }
 
 
@@ -77,14 +94,26 @@ BSfactor<- function(beta1, var1, beta0 = 0, n = 100, threshold = 0.95, hypothesi
     }
 
     tot.len<- length(priors[,1])
-    studies<- length(beta1)
     output<-priors
     output[]<- 0
+    if(is.numeric(beta1)){
+      studies<- length(beta1)
+      for(i in 1:tot.len){
 
-    for(i in 1:tot.len){
+        temp<- calculate.PMP(beta1, var1, beta0, pi0 = priors[i,])
+        output[i,]<-temp$PMP[,studies]
 
-      temp<- calculate.PMP(beta1, var1, beta0, pi0 = priors[i,])
-      output[i,]<-temp$PMP[,studies]
+      }
+
+
+    }else if(is(beta1,"BFcombo")){
+      studies<- length(beta1$beta1)
+      for(i in 1:tot.len){
+
+        temp<- calculate.PMP(beta1$beta1, beta1$var1, beta1$beta0, pi0 = priors[i,])
+        output[i,]<-temp$PMP[,studies]
+
+      }
 
     }
 
