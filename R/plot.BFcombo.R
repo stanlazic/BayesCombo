@@ -23,9 +23,8 @@ plot.BFcombo<-function(x, ... ){
   #Setup
   n.studies<- length(x$beta1)
   data<- matrix(0, ncol = 2 , nrow = n.studies)
-  y<- seq(0,1,length.out = 2*n.studies)
-  y1<-y[seq_along(y)%% 2 == 0]
-  y2<-y[seq_along(y)%% 2 != 0]
+  y1 <- seq(1, 2*n.studies, by=2)
+  y2 <- seq(2, 2*n.studies, by=2)
 
   #begin calculation
   percent<- (x$percent / 100)
@@ -51,10 +50,9 @@ plot.BFcombo<-function(x, ... ){
   p<- p + geom_point(aes(X3,y2),col = "red" ,shape = 124,size = 4) + geom_point(aes(X4,y2), col = "red",shape = 124,size = 4)
   p<- p + geom_segment(aes(x =X3, y = y2 , xend = X4, yend = y2),col = "red")
   p<- p + geom_point(aes(x$beta1,y1))
-  p<- p + geom_text(aes(x$beta1,y1), label = paste("beta" , "^",1,1:n.studies,"*", "'' %+-% '' ","*", round(multiplier,3),"*","sigma","^",11:(10+n.studies), sep = ""),parse = TRUE,nudge_y = -0.03)
-  p<- p + geom_text(aes(rep(0,n.studies),y2),label = paste("beta" , "^",1:n.studies,"*", "'' %+-% '' ","*", round(multiplier,3),"*","sigma","^",1:n.studies, sep = ""),parse = TRUE,nudge_y = -0.03,col = "red")
   p<- p + theme(axis.ticks.y = element_blank(), axis.text.y = element_blank())
-  p<- p + xlab(NULL) + ylab(NULL)
+  # NOTE: need something like: axis.text.y = rep(1:n.studies, each=2)
+  p<- p + xlab("Effect size") + ylab("Study")
   p<- p + ggtitle("Prior Variance Selection")
   p
 }
