@@ -13,31 +13,29 @@
 #'
 #' @seealso \code{\link{unconstrained.BF}}
 
-sample.prop<- function(n,prior.mean,posterior.mean,prior.sd,posterior.sd,hypothesis = 1){
-  if(hypothesis == "1"){
-    "%a%" = function(x,y){x > y}
-  } else {
-    "%a%" = function(x,y) {
-      x < y
+sample.prop <- function(n, prior.mean, posterior.mean,
+                        prior.sd, posterior.sd, hypothesis = 1) {
+    if (hypothesis == "1") {
+        "%a%" <- function(x, y) {
+            x > y
+        }
+    } else {
+        "%a%" <- function(x, y) {
+            x < y
+        }
     }
-  }
-
-  n.post<- length(posterior.mean)
-  Cm<- Fm<- names.vec<- rep(0,n.post)
-
-  Cm[]<- 0.5
-
-  for(i in 1:n.post){
-    Fm[i]<- mean(ifelse(rnorm(n,posterior.mean[i],posterior.sd[i]) %a% prior.mean , 1 , 0))
-
-    names.vec[i]<- paste("prob.post",i,sep = "")
-
-  }
-
-  out<- matrix(0,ncol = (n.post), nrow = 2)
-  rownames(out)<- c("Fm","Cm")
-  colnames(out)<- names.vec
-  out[2,]<- Cm
-  out[1,]<- Fm
-  out
+    n.post <- length(posterior.mean)
+    Cm <- Fm <- names.vec <- rep(0, n.post)
+    Cm[] <- 0.5
+    for (i in 1:n.post) {
+        Fm[i] <- mean(ifelse(rnorm(n, posterior.mean[i],
+                                   posterior.sd[i]) %a% prior.mean, 1, 0))
+        names.vec[i] <- paste("prob.post", i, sep = "")
+    }
+    out <- matrix(0, ncol = (n.post), nrow = 2)
+    rownames(out) <- c("Fm", "Cm")
+    colnames(out) <- names.vec
+    out[2, ] <- Cm
+    out[1, ] <- Fm
+    out
 }

@@ -13,9 +13,9 @@
 #' @seealso \code{\link{PMP.update}}
 
 
-pi0.to.1<- function(pi0,BF){
-  # Pi0 are the prior Model Probabilities and BF are the Bayes factors BF.mu for a single study
-
-  out<- (pi0*BF) / sum(pi0*BF)
-  out
+pi0.to.1 <- function(pi0, BF) {
+    # Pi0 are the prior Model Probabilities and
+    # BF are the Bayes factors BF.mu for a single study
+    out <- (pi0 * BF) / sum(pi0 * BF)
+    out
 }

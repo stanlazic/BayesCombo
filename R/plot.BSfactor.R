@@ -18,13 +18,18 @@
 #'        beta0 = 0, reverse = TRUE )
 #' plot(x)
 
-plot.BSfactor<- function(x, ... ){
-  namevec<-c("H:0","H:>", "H:<")
-  n.prior<- nrow(x$priorMP)
-  plot(x = x$priorMP[,1],y = x$PMP[,1], type = "l", ylim = c(0,1),col = "red", ylab = "Probability", xlab = paste(namevec[tail(x$priorMP,1)== max(tail(x$priorMP,1))], "prior model probability"),
-       main = "Plot of posterior model probabilities vs changing prior model probabilities")
-  lines(x$priorMP[,1],x$PMP[,2], col = "blue")
-  lines(x$priorMP[,1],x$PMP[,3], col = "green")
-  abline(h = x$threshold,lty = 2)
-  legend("left", legend = c("H:0","H:>","H:<"), fill = c("red","blue","green"))
+plot.BSfactor <- function(x, ...) {
+    namevec <- c("H:0", "H:>", "H:<")
+    plot(x = x$priorMP[, 1], y = x$PMP[, 1], type = "l",
+         ylim = c(0, 1), col = "red",
+         ylab = "Probability",
+         xlab = paste(namevec[tail(x$priorMP, 1) == max(tail(x$priorMP, 1))],
+         "prior model probability"),
+         main = "Plot of posterior model probabilities
+         vs changing prior model probabilities")
+    lines(x$priorMP[, 1], x$PMP[, 2], col = "blue")
+    lines(x$priorMP[, 1], x$PMP[, 3], col = "green")
+    abline(h = x$threshold, lty = 2)
+    legend("left", legend = c("H:0", "H:>", "H:<"),
+           fill = c("red", "blue", "green"))
 }

@@ -20,122 +20,117 @@
 #' summary(x)
 
 
-summary.BFcombo<- function(object, ...){
-  # get categories
-  categ<- names(object)
+summary.BFcombo <- function(object, ...) {
+    # get categories
+    categ <- names(object)
 
-  if (all( categ != "var1")){
-    output<- list(Observed = NULL)
-    warning("Only object inputs included")
+    if (all(categ != "var1")) {
+        output <- list(Observed = NULL)
+        warning("Only object inputs included")
 
-    Min_Obs<- round(c(min(object$beta1),min(object$var1)),digits = 4)
-    Max_Obs<- round(c(max(object$beta1),max(object$var1)),digits = 4)
+        Min_Obs <- round(c(min(object$beta1), min(object$var1)), digits = 4)
+        Max_Obs <- round(c(max(object$beta1), max(object$var1)), digits = 4)
 
-    output$Observed<- data.frame(Min = Min_Obs , Max = Max_Obs)
-    rownames(output$Observed)<- c("Mean","Variance")
-  } else if (all( categ != "unBetaPost")) {
+        output$Observed <- data.frame(Min = Min_Obs, Max = Max_Obs)
+        rownames(output$Observed) <- c("Mean", "Variance")
+    } else if (all(categ != "unBetaPost")) {
 
-    output<- list(Observed = NULL, uPrior = NULL)
+        output <- list(Observed = NULL, uPrior = NULL)
 
-    Min_Obs<- round(c(min(object$beta1),min(object$var1)),digits = 4)
-    Max_Obs<- round(c(max(object$beta1),max(object$var1)),digits = 4)
+        Min_Obs <- round(c(min(object$beta1), min(object$var1)), digits = 4)
+        Max_Obs <- round(c(max(object$beta1), max(object$var1)), digits = 4)
 
-    output$Observed<- data.frame(Min = Min_Obs , Max = Max_Obs)
-    rownames(output$Observed)<- c("Mean","Variance")
+        output$Observed <- data.frame(Min = Min_Obs, Max = Max_Obs)
+        rownames(output$Observed) <- c("Mean", "Variance")
 
-    ###
-
-
-    Min_uPrior<- round(c(min(object$beta0),min(object$var0)),digits = 4)
-    Max_uVariance<- round(c(max(object$beta0),max(object$var0)),digits = 4)
-
-    output$Observed<- data.frame(Min = Min_Obs , Max = Max_Obs)
-    rownames(output$Observed)<- c("Mean","Variance")
-
-    output$uPrior<- data.frame(Min = Min_uPrior , Max = Max_uVariance)
-    rownames(output$uPrior)<- c("Mean","Variance")
-
-  } else if (all( categ != "BFmu")){
-    output<- list(Observed = NULL, uPrior = NULL, uPosterior = NULL)
-
-    Min_Obs<- round(c(min(object$beta1),min(object$var1)),digits = 4)
-    Max_Obs<- round(c(max(object$beta1),max(object$var1)),digits = 4)
+        ###
 
 
-    Min_uPrior<- round(c(min(object$beta0),min(object$var0)),digits = 4)
-    Max_uVariance<- round(c(max(object$beta0),max(object$var0)),digits = 4)
+        Min_uPrior <- round(c(min(object$beta0),
+                              min(object$var0)), digits = 4)
+        Max_uVariance <- round(c(max(object$beta0),
+                                 max(object$var0)), digits = 4)
 
+        output$Observed <- data.frame(Min = Min_Obs, Max = Max_Obs)
+        rownames(output$Observed) <- c("Mean", "Variance")
 
-    Min_uPosterior<- round(c(min(object$unBetaPost),min(object$unVarPost)),digits = 4)
-    Max_uPostVariance<- round(c(max(object$unBetaPost),max(object$unVarPost)),digits = 4)
+        output$uPrior <- data.frame(Min = Min_uPrior, Max = Max_uVariance)
+        rownames(output$uPrior) <- c("Mean", "Variance")
 
-    output$Observed<- data.frame(Min = Min_Obs , Max = Max_Obs)
-    rownames(output$Observed)<- c("Mean","Variance")
+    } else if (all(categ != "BFmu")) {
+        output <- list(Observed = NULL, uPrior = NULL, uPosterior = NULL)
 
-    output$uPrior<- data.frame(Min = Min_uPrior , Max = Max_uVariance)
-    rownames(output$uPrior)<- c("Mean","Variance")
-
-    output$uPosterior<- data.frame(Min = Min_uPosterior , Max = Max_uPostVariance)
-    rownames(output$uPosterior)<- c("Mean","Variance")
-
-  } else if(all( categ != "PMP")){
-
-    output<- list(Observed = NULL, uPrior = NULL, uPosterior = NULL,BFmu = NULL)
-
-    Min_Obs<- round(c(min(object$beta1),min(object$var1)),digits = 4)
-    Max_Obs<- round(c(max(object$beta1),max(object$var1)),digits = 4)
-
-
-    Min_uPrior<- round(c(min(object$beta0),min(object$var0)),digits = 4)
-    Max_uVariance<- round(c(max(object$beta0),max(object$var0)),digits = 4)
-
-
-    Min_uPosterior<- round(c(min(object$unBetaPost),min(object$unVarPost)),digits = 4)
-    Max_uPostVariance<- round(c(max(object$unBetaPost),max(object$unVarPost)),digits = 4)
-
-    output$BFmu <- round(object$BFmu,digits = 4)
-
-    output$Observed<- data.frame(Min = Min_Obs , Max = Max_Obs)
-    rownames(output$Observed)<- c("Mean","Variance")
-
-    output$uPrior<- data.frame(Min = Min_uPrior , Max = Max_uVariance)
-    rownames(output$uPrior)<- c("Mean","Variance")
-
-    output$uPosterior<- data.frame(Min = Min_uPosterior , Max = Max_uPostVariance)
-    rownames(output$uPosterior)<- c("Mean","Variance")
-
-
-  } else if(any(categ == "PMP")){
-    output<- list(Observed = NULL, uPrior = NULL, uPosterior = NULL,BFmu = NULL, PMP = NULL)
-
-    Min_Obs<- round(c(min(object$beta1),min(object$var1)),digits = 4)
-    Max_Obs<- round(c(max(object$beta1),max(object$var1)),digits = 4)
-
-
-    Min_uPrior<- round(c(min(object$beta0),min(object$var0)),digits = 4)
-    Max_uVariance<- round(c(max(object$beta0),max(object$var0)),digits = 4)
-
-
-    Min_uPosterior<- round(c(min(object$unBetaPost),min(object$unVarPost)),digits = 4)
-    Max_uPostVariance<- round(c(max(object$unBetaPost),max(object$unVarPost)),digits = 4)
-
-    output$BFmu <- round(object$BFmu,digits = 4)
-
-    output$PMP <- round(object$PMP,digits = 4)
-
-    output$Observed<- data.frame(Min = Min_Obs , Max = Max_Obs)
-    rownames(output$Observed)<- c("Mean","Variance")
-
-    output$uPrior<- data.frame(Min = Min_uPrior , Max = Max_uVariance)
-    rownames(output$uPrior)<- c("Mean","Variance")
-
-    output$uPosterior<- data.frame(Min = Min_uPosterior , Max = Max_uPostVariance)
-    rownames(output$uPosterior)<- c("Mean","Variance")
-
-
-  } else {
-    stop("Please use an input of class BFcombo")
-  }
-
-  output
+        Min_Obs <- round(c(min(object$beta1),
+                           min(object$var1)), digits = 4)
+        Max_Obs <- round(c(max(object$beta1),
+                           max(object$var1)), digits = 4)
+        Min_uPrior <- round(c(min(object$beta0),
+                              min(object$var0)), digits = 4)
+        Max_uVariance <- round(c(max(object$beta0),
+                                 max(object$var0)), digits = 4)
+        Min_uPosterior <- round(c(min(object$unBetaPost),
+                                  min(object$unVarPost)), digits = 4)
+        Max_uPostVariance <- round(c(max(object$unBetaPost),
+                                     max(object$unVarPost)), digits = 4)
+        output$Observed <- data.frame(Min = Min_Obs, Max = Max_Obs)
+        rownames(output$Observed) <- c("Mean", "Variance")
+        output$uPrior <- data.frame(Min = Min_uPrior, Max = Max_uVariance)
+        rownames(output$uPrior) <- c("Mean", "Variance")
+        output$uPosterior <- data.frame(Min = Min_uPosterior,
+                                        Max = Max_uPostVariance)
+        rownames(output$uPosterior) <- c("Mean", "Variance")
+    } else if (all(categ != "PMP")) {
+        output <- list(Observed = NULL, uPrior = NULL, uPosterior = NULL,
+                       BFmu = NULL)
+        Min_Obs <- round(c(min(object$beta1), min(object$var1)),
+                         digits = 4)
+        Max_Obs <- round(c(max(object$beta1), max(object$var1)),
+                         digits = 4)
+        Min_uPrior <- round(c(min(object$beta0), min(object$var0)),
+                            digits = 4)
+        Max_uVariance <- round(c(max(object$beta0), max(object$var0)),
+                               digits = 4)
+        Min_uPosterior <- round(c(min(object$unBetaPost),
+                                  min(object$unVarPost)), digits = 4)
+        Max_uPostVariance <- round(c(max(object$unBetaPost),
+                                     max(object$unVarPost)), digits = 4)
+        output$BFmu <- round(object$BFmu, digits = 4)
+        output$Observed <- data.frame(Min = Min_Obs, Max = Max_Obs)
+        rownames(output$Observed) <- c("Mean", "Variance")
+        output$uPrior <- data.frame(Min = Min_uPrior,
+                                    Max = Max_uVariance)
+        rownames(output$uPrior) <- c("Mean", "Variance")
+        output$uPosterior <- data.frame(Min = Min_uPosterior,
+                                        Max = Max_uPostVariance)
+        rownames(output$uPosterior) <- c("Mean", "Variance")
+    } else if (any(categ == "PMP")) {
+        output <- list(Observed = NULL, uPrior = NULL, uPosterior = NULL,
+                       BFmu = NULL, PMP = NULL)
+        Min_Obs <- round(c(min(object$beta1),
+                           min(object$var1)), digits = 4)
+        Max_Obs <- round(c(max(object$beta1),
+                           max(object$var1)), digits = 4)
+        Min_uPrior <- round(c(min(object$beta0),
+                              min(object$var0)), digits = 4)
+        Max_uVariance <- round(c(max(object$beta0),
+                                 max(object$var0)), digits = 4)
+        Min_uPosterior <- round(c(min(object$unBetaPost),
+                                  min(object$unVarPost)), digits = 4)
+        Max_uPostVariance <- round(c(max(object$unBetaPost),
+                                     max(object$unVarPost)), digits = 4)
+        output$BFmu <- round(object$BFmu, digits = 4)
+        output$PMP <- round(object$PMP, digits = 4)
+        output$Observed <- data.frame(Min = Min_Obs,
+                                      Max = Max_Obs)
+        rownames(output$Observed) <- c("Mean", "Variance")
+        output$uPrior <- data.frame(Min = Min_uPrior,
+                                    Max = Max_uVariance)
+        rownames(output$uPrior) <- c("Mean", "Variance")
+        output$uPosterior <- data.frame(Min = Min_uPosterior,
+                                        Max = Max_uPostVariance)
+        rownames(output$uPosterior) <- c("Mean", "Variance")
+    } else {
+        stop("Please use an input of class BFcombo")
+    }
+    output
 }
