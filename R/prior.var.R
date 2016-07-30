@@ -1,7 +1,7 @@
 #' @title Calculate the prior variances for the unconstrained model
-#' @description Given a set of values for the observed mean,variance and the prior mean, a set of unconstrained prior varuiances are calculated.
+#' @description Given a set of values for the observed mean,variance and the prior mean, a set of unconstrained prior variances are calculated.
 #'
-#' @details The prior varianes are calculated by getting the largest confidence interval from the prior mean by using the
+#' @details The prior variances are calculated by getting the largest confidence interval from the prior mean by using the
 #' confidence interval of the observed values.
 #'
 #'

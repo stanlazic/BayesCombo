@@ -1,6 +1,6 @@
 #' @title Calculate updated Posterior Model Proababilities
 #'
-#' @description Wrapper function to caclulate the posterior model probabilities from the observed means and variances.
+#' @description Wrapper function to caclulate the posterior model probabilities from the observed effect sizes and their respective variances.
 #'
 #' @details Creates the BFcombo object from the inputs and runs a pipeline to produce the complete set of posterior model
 #' probabilities given the inputs.
@@ -8,7 +8,7 @@
 #' @param beta1 Vector of observed means
 #' @param var1 Vector of observed variances
 #' @param pi0 Vector of prior model probabilities
-#' @param beta0 Vector or value of prior means (usually 0)
+#' @param beta0 Vector or value of prior means
 #' @param n Number of times distributions are sampled
 #' @param var.mult Multiplier of the prior variances
 #' @param percent Sets the percentage of the confidence interval. Default is 99.

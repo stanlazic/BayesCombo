@@ -1,6 +1,6 @@
 #' @title Calculates sampling proportions for the unconstrained parameters and is called in the unconstrained.BF function.
 #'
-#' @description Done using sampling with the prior and posterior means and variances
+#' @description Sampling the prior and posterior distributions given their means and variances
 #'
 #' @details This function is called within the unconstrained.BF function in the BayesCombo package
 #'

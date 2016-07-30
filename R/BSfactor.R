@@ -1,6 +1,6 @@
 #' @title Calculate Bayes Safety factor
 #'
-#' @description Calculates how much can the prior model probability be weighted to the null hypothesis.
+#' @description Calculates how much the prior model probability be weighted to a given hypothesis untill the result of running calculate.PMP will change for a given threshold.
 #'
 #' @details Incrementally increases a the prior posterior probability for a given hypothesis, and shows the resulting posterior
 #' model probabilities
