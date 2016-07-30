@@ -21,7 +21,7 @@ sample.prop(n, prior.mean, posterior.mean, prior.sd, posterior.sd,
 \item{hypothesis}{Choose the hypothesis to sample from}
 }
 \description{
-Done using sampling with the prior and posterior means and variances
+Sampling the prior and posterior distributions given their means and variances
 }
 \details{
 This function is called within the unconstrained.BF function in the BayesCombo package

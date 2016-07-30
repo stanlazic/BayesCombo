@@ -8,9 +8,9 @@ BSfactor(beta1, var1 = NULL, beta0 = 0, n = 100, threshold = 0.95,
   hypothesis = 1, reverse = FALSE)
 }
 \arguments{
-\item{beta1}{Vector of observed means or an object of class "BFcombo"}
+\item{beta1}{Vector of observed means or an object of class 'BFcombo'}
 
-\item{var1}{Vector of observed variances or NULL if beta1 is class "BFcombo"}
+\item{var1}{Vector of observed variances or NULL if beta1 is class 'BFcombo'}
 
 \item{beta0}{Vector or value of prior means. Default is  0}
 
@@ -24,11 +24,11 @@ BSfactor(beta1, var1 = NULL, beta0 = 0, n = 100, threshold = 0.95,
 hypothesis which will increase in probability}
 }
 \value{
-Object of class "BSfactor" which contains a matrix of final posterior model probabilities, a matrix of prior model probabilities,
+Object of class 'BSfactor' which contains a matrix of final posterior model probabilities, a matrix of prior model probabilities,
 the 'boundary' and which hypothesis is being considered
 }
 \description{
-Calculates how much can the prior model probability be weighted to the null hypothesis.
+Calculates how much the prior model probability be weighted to a given hypothesis untill the result of running calculate.PMP will change for a given threshold.
 }
 \details{
 Incrementally increases a the prior posterior probability for a given hypothesis, and shows the resulting posterior
