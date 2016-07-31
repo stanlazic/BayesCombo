@@ -21,10 +21,10 @@ prior.var(beta1, var1, beta0, pi0, percent = 99)
 vector of equal length to that of the observed variances.
 }
 \description{
-Given a set of values for the observed mean,variance and the prior mean, a set of unconstrained prior varuiances are calculated.
+Given a set of values for the observed mean,variance and the prior mean, a set of unconstrained prior variances are calculated.
 }
 \details{
-The prior varianes are calculated by getting the largest confidence interval from the prior mean by using the
+The prior variances are calculated by getting the largest confidence interval from the prior mean by using the
 confidence interval of the observed values.
 }
 

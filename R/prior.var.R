@@ -1,4 +1,5 @@
 #' @title Calculate the prior variances for the unconstrained model
+<<<<<<< HEAD
 #' 
 #' @description Given a set of values for the effect sizes and their standard
 #' errors a set of unconstrained prior variances are calculated. Not called
@@ -7,6 +8,12 @@
 #' @details The prior variances are calculated by getting the largest confidence
 #' interval from the prior mean by using the confidence interval of the observed
 #' values.
+=======
+#' @description Given a set of values for the observed mean,variance and the prior mean, a set of unconstrained prior variances are calculated.
+#'
+#' @details The prior variances are calculated by getting the largest confidence interval from the prior mean by using the
+#' confidence interval of the observed values.
+>>>>>>> bc3ff0fc739b0e89bbf38afc008be33d6faede7d
 #'
 #' @param beta Vector of observed effect sizes.
 #' @param se.beta Vector of standard errors for the effect sizes.

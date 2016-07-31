@@ -1,7 +1,11 @@
 #' @title Calculates sampling proportions for the unconstrained parameters
 #'
+<<<<<<< HEAD
 #' @description Done using sampling with the prior and posterior means and
 #' variances.
+=======
+#' @description Sampling the prior and posterior distributions given their means and variances
+>>>>>>> bc3ff0fc739b0e89bbf38afc008be33d6faede7d
 #'
 #' @details This function is called within the unconstrained.BF function and is
 #' not called directly by the user.

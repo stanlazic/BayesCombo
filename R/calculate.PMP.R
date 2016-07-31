@@ -1,11 +1,16 @@
 #' @title Calculate posterior model probabilities
 #'
+<<<<<<< HEAD
 #' @description Calculate the posterior model probabilities from the observed
 #' effect sizes and their standard errors.
+=======
+#' @description Wrapper function to caclulate the posterior model probabilities from the observed effect sizes and their respective variances.
+>>>>>>> bc3ff0fc739b0e89bbf38afc008be33d6faede7d
 #'
 #' @details Creates the BFcombo object from the inputs and of posterior model
 #' probabilities given the inputs.
 #'
+<<<<<<< HEAD
 #' @param beta Vector of observed effect sizes.
 #' @param se.beta Vector of observed standard errors for the effect sizes.
 #' @param pi0 Vector of prior model probabilities specified in the following
@@ -17,6 +22,15 @@
 #' sensitivity of the results to the width of the prior.
 #' @param percent Sets the percentage of the confidence interval. Default is
 #' 99%.
+=======
+#' @param beta1 Vector of observed means
+#' @param var1 Vector of observed variances
+#' @param pi0 Vector of prior model probabilities
+#' @param beta0 Vector or value of prior means
+#' @param n Number of times distributions are sampled
+#' @param var.mult Multiplier of the prior variances
+#' @param percent Sets the percentage of the confidence interval. Default is 99.
+>>>>>>> bc3ff0fc739b0e89bbf38afc008be33d6faede7d
 #'
 #' @return Object of class BFcombo which contains a matrix of posterior model
 #' probabilities for each updated step.

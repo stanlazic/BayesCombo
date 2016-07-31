@@ -4,8 +4,8 @@
 \alias{calculate.PMP}
 \title{Calculate updated Posterior Model Proababilities}
 \usage{
-calculate.PMP(beta1, var1, pi0, beta0, n = 10000, var.mult = 1,
-  percent = 99)
+calculate.PMP(beta1, var1, pi0 = rep(1/3, 3), beta0 = 0, n = 10000,
+  var.mult = 1, percent = 99)
 }
 \arguments{
 \item{beta1}{Vector of observed means}
@@ -14,7 +14,7 @@ calculate.PMP(beta1, var1, pi0, beta0, n = 10000, var.mult = 1,
 
 \item{pi0}{Vector of prior model probabilities}
 
-\item{beta0}{Vector or value of prior means (usually 0)}
+\item{beta0}{Vector or value of prior means}
 
 \item{n}{Number of times distributions are sampled}
 
@@ -26,16 +26,16 @@ calculate.PMP(beta1, var1, pi0, beta0, n = 10000, var.mult = 1,
 Object of class BFcombo which contains a matrix of posterior model probabilities for each updated step.
 }
 \description{
-Wrapper function to caclulate the posterior model probabilities from the observed means and variances.
+Wrapper function to caclulate the posterior model probabilities from the observed effect sizes and their respective variances.
 }
 \details{
 Creates the BFcombo object from the inputs and runs a pipeline to produce the complete set of posterior model
 probabilities given the inputs.
 }
 \examples{
-x <- calculate.PMP( beta1 = c(0.090,0.140,1.090,1.781),
-       var1 = c(0.000841,0.002916,0.008649,0.032041),
-       beta0 = 0, pi0 = rep(1/3,3))
+x <- calculate.PMP(beta1 = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
+       var1 = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
+    beta0 = 0, pi0 = rep(1/3,3) )
 }
 \seealso{
 \code{\link{prior.var} \link{u.post.param} \link{unconstrained.BF} \link{PMP.update}}

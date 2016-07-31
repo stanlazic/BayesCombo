@@ -9,7 +9,7 @@
 \arguments{
 \item{object}{A object of the class BSfactor}
 
-\item{...}{Additional parameters}
+\item{...}{Additional parameters not required}
 }
 \value{
 A summary of the BSfactor object passed.
