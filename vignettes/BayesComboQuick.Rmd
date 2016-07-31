@@ -1,6 +1,6 @@
 ---
 title: "BayesCombo: A Quick Guide"
-author: "Bruno Contrino"
+author: "Bruno Contrino & Stanley Lazic"
 date: "18 July 2016"
 output: 
   rmarkdown::html_vignette:
@@ -14,11 +14,11 @@ vignette: >
 
 ```{r setup, echo = FALSE, warning= FALSE,message=FALSE}
 library(BayesCombo)
-
 ```
+
 # Introduction 
 
-This vignette aims to give a basic walkthrough on how to use the __BayesCombo__ package. The package is used to combine evidence from multiple studies, based on a method described by Kuiper et al [1],  using Bayes Factors. 
+This vignette gives a basic walkthrough on the __BayesCombo__ package. The method combines evidence from multiple studies using Bayes Factors and is based on a method described by Kuiper et al. [1]. 
 
 For a detailed explanation on the package and all of its code please see the __BayesCombo-Walkthrough__ vignette. 
 
@@ -29,15 +29,15 @@ For a detailed explanation on the package and all of its code please see the __B
 
 This function is the basis of the __BayesCombo__ package as it calculates the updated posterior model probabilities for the given inputs. It is advised to run this as function first and store the results in a variable. The function carries out the main pipeline and the object which is returned will include the final results and returns an object of class "BFcombo" with multiple sections. 
 
-#### Inputs  
+#### Inputs
 
-**beta1**
+**beta**
 
 This is a vector of the effect sizes from the various studies which will be combined. 
 
-**var1**
+**se.beta**
 
-This is a vector of varianes from the studies which will be combined. 
+This is a vector of variances from the studies which will be combined. 
 
 **beta0**
 
@@ -45,7 +45,7 @@ This is the prior mean and is usually set at 0.
 
 **pi0**
 
-This is a vector of length three containing theprior model probabilities for each hypothesis. This must sum to 1 and it is advised to set this as `rep(1/3 , 3)`.
+This is a vector of length three containing the prior model probabilities for each hypothesis. This must sum to 1 and it is advised to set this as `rep(1/3 , 3)`.
 
 **percent** 
 
@@ -55,11 +55,11 @@ This sets the size of the percentage confidence intervals used to calculate the 
 
 The calculate PMP function returns an object of class "BFcombo" with the following sections:
 
-**beta1**
+**beta**
 
 This is a vector of the effect sizes from the various studies which will be combined. 
 
-**var1**
+**se.beta**
 
 This is a vector of varianes from the studies which will be combined. 
 
@@ -69,11 +69,11 @@ This is the prior mean and is usually set at 0.
 
 **pi0**
 
-This is a vector of length three containing theprior model probabilities for each hypothesis. This must sum to 1 and it is advised to set this as `rep(1/3 , 3)`. 
+This is a vector of length three containing the prior model probabilities for each hypothesis. This must sum to 1 and it is advised to set this as `rep(1/3 , 3)`. 
 
 **var0** 
 
-This is a Vector of the prior variances which have been computed. 
+This is a vector of the prior variances which have been computed. 
 
 **percent**
  
@@ -89,7 +89,7 @@ This is a vector of unconstrained posterior variances.
 
 **BFmu**
 
-This is a matrix of the uncostrained Bayes factors for each hypothesis per study.
+This is a matrix of the unconstrained Bayes factors for each hypothesis per study.
 
 **PMP**
 
@@ -99,8 +99,8 @@ This is a `3 x Number of Studies` matrix which gives the updated posterior model
 
 ```{r calculatePMP}
 
- x <- calculate.PMP(beta1 = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-        var1 = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
+ x <- calculate.PMP(beta = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
+        se.beta = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
     beta0 = 0, pi0 = rep(1/3,3) )
  x
 ```
@@ -113,16 +113,16 @@ This function is named after the Bayes Safety factor which aim s to show, given 
 
 This function can take two kinds of inputs: numerical vectors and objects of class "BFcombo" which will be created by running the `calculate.PMP` function. 
 
-**beta1**
+**beta**
 
 This is a vector of the effect sizes from the various studies which will be combined.
 
-beta1 can also be an object of class "BFcombo".
+beta can also be an object of class "BFcombo".
 
-**var1**
+**se.beta**
 
 This is a vector of variances from the studies which will be combined. 
-In the case that beta1 is of class "BFcombo", var1 will take its default value of NULL.
+In the case that beta is of class "BFcombo", se.beta will take its default value of NULL.
 
 
 **beta0**
@@ -135,7 +135,7 @@ This is the number of steps from 0.33333 to 0.99999 which the prior model probab
 
 **threshold** 
 
-This is a value between 0 and 1 which will be used to set the boundary point at which the PMP balue is less than as the prior model probbilities change. The default is 0.95. 
+This is a value between 0 and 1 which will be used to set the boundary point at which the PMP value is less than as the prior model probabilities change. The default is 0.95. 
 
 **hypothesis**
 
@@ -179,8 +179,8 @@ Depending on the value on reverse this will change.
 #### Example
 
 ```{r BSfactor}
-y <- BSfactor( beta1 = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-       var1 = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
+y <- BSfactor( beta = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
+       se.beta = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
        beta0 = 0, reverse = TRUE , n = 12 )
 y
 ```
@@ -210,7 +210,7 @@ This gives a `3 x Number of studies` matrix with the Bayes factors per study rou
 
 **PMP**
 
-This gives a `3 x Number of studies` matrix with thevalues of the posterior model probabilities rounded to 4 digits. 
+This gives a `3 x Number of studies` matrix with the values of the posterior model probabilities rounded to 4 digits. 
 
 #### Example
 
@@ -256,7 +256,7 @@ summary(y)
 
 #### For "BFcombo" object
 
-Plot when used on a object of class "BFcombo" will give a visulisation of the observed variances and the prior variances which will be used. This plotting function uses ggplot. 
+Plot when used on a object of class "BFcombo" will give a visualisation of the observed variances and the prior variances which will be used. This plotting function uses ggplot. 
 
 ##### Example
 
@@ -266,7 +266,7 @@ plot(x)
 
 #### For "BSfactor" object
 
-Plot when used on a object of class "BSfactor" will give a visulisation of the change in posterior model probability values for each hypothesis as the prior model probabilities are changed. 
+Plot when used on a object of class "BSfactor" will give a visualisation of the change in posterior model probability values for each hypothesis as the prior model probabilities are changed. 
 
 
 ##### Example
@@ -277,7 +277,7 @@ plot(y)
 
 ### PMP.plot
 
-This function is used on objects of class "BFcombo" and provides a different visualisation to calling the standard plot function. This gives a plot of the prior model probabilities of each hypothesis and their repective posterior model probabilities as they get updated. 
+This function is used on objects of class "BFcombo" and provides a different visualisation to calling the standard plot function. This gives a plot of the prior model probabilities of each hypothesis and their respective posterior model probabilities as they get updated. 
 
 ##### Example
 
@@ -289,7 +289,7 @@ PMP.plot(x)
 
 # References 
 
-[1] **Combining Statistical Evidence From Several Studies: A Method Using Bayesian Updating and an Example From Research on Trust Problems in Social and Economic Exchange**, (Rebecca M. Kuiper, Vincent Buskens, Werner Raub, and Herbert Hoijtink, 2012)
+[1] Kuiper RM, Buskens V, Raub W, Hoijtink H (2012). Combining statistical evidence from several studies: A method using Bayesian updating and an example from research on trust problems in social and economic exchange. __Sociological Methods and Research__ 42(1) 60-81.
 
 
 

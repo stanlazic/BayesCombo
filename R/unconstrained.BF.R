@@ -1,20 +1,24 @@
 #' @title Calculate Bayes factors for the unconstrained model
 #'
-#' @description Using the unconstained prior and posterior models, the unconstrained Bayes factors for each
-#'  of the hypotheses are calculated.
+#' @description Using the unconstrained prior and posterior models, the
+#' unconstrained Bayes factors for each of the hypotheses are calculated. Not
+#' called directly by user.
 #'
-#' @details The unconstrained Bayes factors are calculated using proportions calculated by sampling
-#'  the distributions of the unconstrained prior and posterior models. This function calls upon a sampling function sample.prop.
+#' @details The unconstrained Bayes factors are calculated using proportions
+#' calculated by sampling the distributions of the unconstrained prior and
+#' posterior models. This function calls upon a sampling function,
+#' \code{sample.prop}.
 #'
-#' @param BFcombo An object of class BFcombo
-#' @param n Number of times the distributions are sampled
+#' @param BFcombo An object of class BFcombo.
+#' @param n Number of times the distributions are sampled.
 #'
-#' @return Object of class BFcombo which contains the values for the unconstrained Bayes factors for each hypothesis.
+#' @return Object of class BFcombo which contains the values for the
+#' unconstrained Bayes factors for each hypothesis.
+#' 
 #' @seealso \code{\link{PMP.update}}
-#'
 
 
-unconstrained.BF <- function(BFcombo, n = 1000) {
+unconstrained.BF <- function(BFcombo, n = 10000) {
     if (any(names(BFcombo) == "unBetaPost")) {
         # BF_0u NULL
         n.studies <- length(BFcombo$unBetaPost)

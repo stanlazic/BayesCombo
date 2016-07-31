@@ -1,16 +1,20 @@
-#' @title Updating Posterior Model Proababilities
+#' @title Updates posterior model probabilities
 #'
-#' @description The posterior model probabilities can be calculated using the unconstrained Bayes factors and then updated.
+#' @description The posterior model probabilities are calculated using the
+#' unconstrained Bayes factors and then updated. This function is not called
+#' directly by the user.
 #'
-#' @details
-#' The posterior model probabilities are then set as the prior model porbablities. This is an updating step and will allow the combination of several studies.
-#' Once the prior model probabilities are updated, the posterior model probabilitiesare calcuated again.
+#' @details The posterior model probabilities are then set as the prior model
+#' probabilities. This is an updating step and will allow the combination of
+#' several studies.  Once the prior model probabilities are updated, the
+#' posterior model probabilities are calculated again.
 #'
-#' @param BFcombo An object of class BFcombo
+#' @param BFcombo An object of class BFcombo.
 #'
-#' @return Object of class BFcombo which contains a matrix of posterior model probabilities for each updated step.
+#' @return Object of class BFcombo which contains a matrix of posterior model
+#' probabilities for each updated step.
+#' 
 #' @seealso \code{\link{pi0.to.1} \link{calculate.PMP}}
-#'
 
 PMP.update <- function(BFcombo) {
     if (any(names(BFcombo) == "BFmu")) {

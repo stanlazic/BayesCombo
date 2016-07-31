@@ -1,22 +1,23 @@
-#' @title Summarize a BSfactor object
+#' @title Summarise a BSfactor object
 #'
 #' @description Gives summary of various sections of the BSfactor class.
 #'
-#' @details For all section of the BSfactor object which are matrices,
-#'  the summary function will return the first and last rows with the values rounded to 4 decimal points.
-#'  The summary also contains other key pieces of information such as boundary and threshold.
+#' @details For all section of the BSfactor object which are matrices, the
+#' summary function will return the first and last rows with the values rounded
+#' to 4 decimal points.  The summary also contains other key pieces of
+#' information such as boundary and threshold.
 #'
 #' @param object A object of the class BSfactor
 #' @param ... Additional parameters not required
 #'
-#' @return A summary of the BSfactor object passed.
+#' @return A summary of the BSfactor object.
 #'
 #' @seealso \code{ \link{BSfactor}}
 #'
 #' @export
 #' @examples
-#' x <- BSfactor( beta1 = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-#'        var1 = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
+#' x <- BSfactor( beta = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
+#'        se.beta = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
 #'        beta0 = 0, reverse = TRUE )
 #' summary(x)
 
