@@ -2,19 +2,21 @@
 % Please edit documentation in R/u.post.params.R
 \name{u.post.param}
 \alias{u.post.param}
-\title{Calculate unconstrained Posterior Model parameters.}
+\title{Calculate unconstrained posterior model parameters}
 \usage{
 u.post.param(BFcombo)
 }
 \arguments{
-\item{BFcombo}{A object of the class BFcombo but must also incldes a section with unconstrained prior variances}
+\item{BFcombo}{A object of the class BFcombo but must also includes a section
+with unconstrained prior variances.}
 }
 \value{
 A set of unconstrained posterior variances and means.
 }
 \description{
-Calculates the unconstrained posterior model parameters which will then be used to calculate
-unconstained Bayes factors.
+Calculates the unconstrained posterior model parameters which
+will then be used to calculate unconstrained Bayes factors. Not called
+directly by user.
 }
 \details{
 See vignette for detailed explanation.

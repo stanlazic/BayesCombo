@@ -2,23 +2,24 @@
 % Please edit documentation in R/calculate.PMP.R
 \name{calculate.PMP}
 \alias{calculate.PMP}
-\title{Calculate updated Posterior Model Proababilities}
+\title{Calculate updated posterior model proababilities}
 \usage{
-calculate.PMP(beta1, var1, pi0 = rep(1/3, 3), beta0 = 0, n = 10000,
+calculate.PMP(beta, se.beta, pi0 = rep(1/3, 3), beta0 = 0, n = 10000,
   var.mult = 1, percent = 99)
 }
 \arguments{
-\item{beta1}{Vector of observed means}
+\item{beta}{Vector of observed effect sizes.}
 
-\item{var1}{Vector of observed variances}
+\item{se.beta}{Vector of observed standard errors.}
 
-\item{pi0}{Vector of prior model probabilities}
+\item{pi0}{Vector of prior model probabilities.
+Specified in the following order: null, greater than zero, less than zero. The priors default to 1/3 for each.}
 
-\item{beta0}{Vector or value of prior means}
+\item{beta0}{Vector or value of prior effect sizes.}
 
-\item{n}{Number of times distributions are sampled}
+\item{n}{Number of times distributions are sampled.}
 
-\item{var.mult}{Multiplier of the prior variances}
+\item{var.mult}{Multiplier for the prior variances. Can be used to test the sensitivity of the results to the width of the prior.}
 
 \item{percent}{Sets the percentage of the confidence interval. Default is 99.}
 }
@@ -26,16 +27,15 @@ calculate.PMP(beta1, var1, pi0 = rep(1/3, 3), beta0 = 0, n = 10000,
 Object of class BFcombo which contains a matrix of posterior model probabilities for each updated step.
 }
 \description{
-Wrapper function to caclulate the posterior model probabilities from the observed effect sizes and their respective variances.
+Calculate the posterior model probabilities from the observed effect sizes and their standard errors.
 }
 \details{
 Creates the BFcombo object from the inputs and runs a pipeline to produce the complete set of posterior model
 probabilities given the inputs.
 }
 \examples{
-x <- calculate.PMP(beta1 = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-       var1 = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
-    beta0 = 0, pi0 = rep(1/3,3) )
+x <- calculate.PMP( beta = c(0.0126, 5.0052, 1.2976, 0.0005),
+       se.beta = c(0.050, 2.581, 2.054, 0.003) )
 }
 \seealso{
 \code{\link{prior.var} \link{u.post.param} \link{unconstrained.BF} \link{PMP.update}}

@@ -2,46 +2,70 @@
 % Please edit documentation in R/BSfactor.R
 \name{BSfactor}
 \alias{BSfactor}
-\title{Calculate Bayes Safety factor}
+\title{Calculate a 'Bayesian Safety (BS) factor}
 \usage{
-BSfactor(beta1, var1 = NULL, beta0 = 0, n = 100, threshold = 0.95,
+BSfactor(beta, se.beta = NULL, beta0 = 0, n = 100, threshold = 0.95,
   hypothesis = 1, reverse = FALSE)
 }
 \arguments{
-\item{beta1}{Vector of observed means or an object of class 'BFcombo'}
+\item{beta}{Vector of observed effect sizes, or an object of class
+'BFcombo'.}
 
-\item{var1}{Vector of observed variances or NULL if beta1 is class 'BFcombo'}
+\item{se.beta}{Vector of observed standard errors for the effect
+size, or NULL if beta is of class 'BFcombo'.}
 
-\item{beta0}{Vector or value of prior means. Default is  0}
+\item{beta0}{Vector or value of prior effect sizes. If beta is a 'BFcombo'
+object, then beta0 is taken from there. Otherwise, it can be specified and
+the default is 0.}
 
-\item{n}{Number of steps between 0.33333 and 0.99999}
+\item{n}{Number of steps between 0.33333 and 0.99999 to calculate the BS
+factor. Increasing n gives a more accurate estimate.}
 
-\item{threshold}{Sets the value at which the border is set}
+\item{threshold}{The 'significance' cut-off value for a non-null posterior
+model probability.}
 
-\item{hypothesis}{Parameter has different functionalities depending on value of reverse}
+\item{hypothesis}{Parameter has different functionalities depending on value
+of reverse.}
 
-\item{reverse}{Changes the hypothesis in which the prior model probability increases. If this is TRUE then the value of the hypothesis parameter will determine the
-hypothesis which will increase in probability}
+\item{reverse}{Changes the hypothesis in which the prior model probability
+increases. If this is TRUE then the value of the hypothesis parameter will
+determine which of the two non-null hypotheses will increase in probability.
+If FALSE, the value hypothesis will change the hypothesis for which the
+boundary is chosen whilst the null hypothesis will be increased
+in probability. Default is FALSE}
 }
 \value{
-Object of class 'BSfactor' which contains a matrix of final posterior model probabilities, a matrix of prior model probabilities,
-the 'boundary' and which hypothesis is being considered
+Object of class 'BSfactor' which contains a matrix of final posterior
+model probabilities, a matrix of prior model probabilities, the 'boundary'
+and which hypothesis is being considered.
 }
 \description{
-Calculates how much the prior model probability be weighted to a given hypothesis untill the result of running calculate.PMP will change for a given threshold.
+Calculates the prior probability for the null that gives a just
+significant result.
 }
 \details{
-Incrementally increases a the prior posterior probability for a given hypothesis, and shows the resulting posterior
-model probabilities
+When the posterior probability for a non-null hypothesis is large,
+it may be of interest to calculate the prior for the null that gives a just
+significant result. Here 'significant' is a threshold that the posterior must
+exceed. For example, if a series of experiments on homeopathy gives a
+posterior probability of 0.98 in favour homeopathy's effectiveness, we can
+calculate the strength of the prior needed to make the posterior just pass
+the 0.98 threshold. If the BS factor is very large (sceptical prior), then we
+may be more inclined to believe the results because they were sufficient to
+shift a strong prior belief in no effect. If the data can only overcome a
+weak prior, then the results may be unconvincing, despite having a large
+posterior probability. We can ask ourselves if our prior is greater or less
+than the BS factor, and judge the results accordingly.
 }
 \examples{
 
-x <- BSfactor( beta1 = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-       var1 = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
+x <- BSfactor(beta = c(0.0126, 5.005, 1.298, 0.000476),
+       se.beta = c(0.0504, 2.5811, 2.0541, 0.0026),
        beta0 = 0, reverse = TRUE )
 
+summary(x)
 }
 \seealso{
-\code{\link{plot.BSfactor}, \link{seq}}
+\code{\link{plot.BSfactor}}
 }
 

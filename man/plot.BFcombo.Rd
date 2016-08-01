@@ -2,26 +2,26 @@
 % Please edit documentation in R/plot.BFcombo.R
 \name{plot.BFcombo}
 \alias{plot.BFcombo}
-\title{Plot of Prior Variances given Observed Means and Variances}
+\title{Plots effect sizes, confidence intervals, and prior variances}
 \usage{
 \method{plot}{BFcombo}(x, ...)
 }
 \arguments{
 \item{x}{A object of the class BFcombo (see make_BFcombo)}
 
-\item{...}{additional parameters not required}
+\item{...}{additional plotting parameters.}
 }
 \value{
-Plot of Prior and observed confidence intervals.
+Plot of prior and observed confidence intervals.
 }
 \description{
-Produces a visualisation of prior variances by plotting the confidence intervals around the
- prior mean and also shows the observed means and variances as confidence intervals.
+Produces a visualisation of prior variances by plotting the
+confidence intervals around the prior effect size and also shows the observed
+effect size confidence intervals.
 }
 \examples{
-x <- calculate.PMP( beta1 = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-    var1 = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
-    beta0 = 0, pi0 = rep(1/3,3) )
+x <- calculate.PMP( beta = c(0.0126, 5.0052, 1.2976, 0.0005),
+       se.beta = c(0.050, 2.581, 2.054, 0.003) )
 plot(x)
 }
 \seealso{

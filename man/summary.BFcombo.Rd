@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary.BFcombo.R
 \name{summary.BFcombo}
 \alias{summary.BFcombo}
-\title{Summarize a BFcombo object}
+\title{Summarise a BFcombo object}
 \usage{
 \method{summary}{BFcombo}(object, ...)
 }
@@ -18,13 +18,14 @@ A summary of the BFcombo object passed.
 Gives summary of various sections of the BFcombo class.
 }
 \details{
-For all the sections which provide a mean or variance vector, the summary function will return a minimum and maximim value.
-For a Bayes factor or probability, the summary function will return a matrix with the values rounded to 4 decimal points.
+For all the sections which provide a mean or variance vector, the
+summary function will return a minimum and maximum value.  For a Bayes factor
+or probability, the summary function will return a matrix with the values
+rounded to 4 decimal points.
 }
 \examples{
-x <- calculate.PMP( beta1 = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-    var1 = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
-    beta0 = 0, pi0 = rep(1/3,3) )
+x <- calculate.PMP( beta = c(0.0126, 5.0052, 1.2976, 0.0005),
+       se.beta = c(0.050, 2.581, 2.054, 0.003) )
 summary(x)
 }
 \seealso{

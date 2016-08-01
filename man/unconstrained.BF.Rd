@@ -4,23 +4,27 @@
 \alias{unconstrained.BF}
 \title{Calculate Bayes factors for the unconstrained model}
 \usage{
-unconstrained.BF(BFcombo, n = 1000)
+unconstrained.BF(BFcombo, n = 10000)
 }
 \arguments{
-\item{BFcombo}{An object of class BFcombo}
+\item{BFcombo}{An object of class BFcombo.}
 
-\item{n}{Number of times the distributions are sampled}
+\item{n}{Number of times the distributions are sampled.}
 }
 \value{
-Object of class BFcombo which contains the values for the unconstrained Bayes factors for each hypothesis.
+Object of class BFcombo which contains the values for the
+unconstrained Bayes factors for each hypothesis.
 }
 \description{
-Using the unconstained prior and posterior models, the unconstrained Bayes factors for each
- of the hypotheses are calculated.
+Using the unconstrained prior and posterior models, the
+unconstrained Bayes factors for each of the hypotheses are calculated. Not
+called directly by user.
 }
 \details{
-The unconstrained Bayes factors are calculated using proportions calculated by sampling
- the distributions of the unconstrained prior and posterior models. This function calls upon a sampling function sample.prop.
+The unconstrained Bayes factors are calculated using proportions
+calculated by sampling the distributions of the unconstrained prior and
+posterior models. This function calls upon a sampling function,
+\code{sample.prop}.
 }
 \seealso{
 \code{\link{PMP.update}}

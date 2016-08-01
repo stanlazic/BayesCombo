@@ -2,22 +2,27 @@
 % Please edit documentation in R/PMP.update.R
 \name{PMP.update}
 \alias{PMP.update}
-\title{Updating Posterior Model Proababilities}
+\title{Updates posterior model probabilities}
 \usage{
 PMP.update(BFcombo)
 }
 \arguments{
-\item{BFcombo}{An object of class BFcombo}
+\item{BFcombo}{An object of class BFcombo.}
 }
 \value{
-Object of class BFcombo which contains a matrix of posterior model probabilities for each updated step.
+Object of class BFcombo which contains a matrix of posterior model
+probabilities for each updated step.
 }
 \description{
-The posterior model probabilities can be calculated using the unconstrained Bayes factors and then updated.
+The posterior model probabilities are calculated using the
+unconstrained Bayes factors and then updated. This function is not called
+directly by the user.
 }
 \details{
-The posterior model probabilities are then set as the prior model porbablities. This is an updating step and will allow the combination of several studies.
-Once the prior model probabilities are updated, the posterior model probabilitiesare calcuated again.
+The posterior model probabilities are then set as the prior model
+probabilities. This is an updating step and will allow the combination of
+several studies.  Once the prior model probabilities are updated, the
+posterior model probabilities are calculated again.
 }
 \seealso{
 \code{\link{pi0.to.1} \link{calculate.PMP}}

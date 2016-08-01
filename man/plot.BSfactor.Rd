@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.BSfactor.R
 \name{plot.BSfactor}
 \alias{plot.BSfactor}
-\title{Plot Bayes Safety factor results}
+\title{Plots Bayesian safety (BS) factor results}
 \usage{
 \method{plot}{BSfactor}(x, ...)
 }
@@ -12,18 +12,20 @@
 \item{...}{additional parameters not required}
 }
 \value{
-Plot of posterior model probabilities in relation to changes in the prior model probabilities.
+Plot of posterior model probabilities in relation to changes in the
+prior model probabilities.
 }
 \description{
 Produces a visualisation of the Bayes safety factor results.
 }
 \details{
-Each solid line is a hypothesis, the x-axis is of the prior model proability for the null hypothesis,
-the y-axis is the posterior model probability. The dotted line is the threshold.
+Each solid line is a hypothesis, the x-axis is the prior model
+probability for the null hypothesis and the y-axis is the posterior model
+probability. The dotted line is the threshold.
 }
 \examples{
-x <- BSfactor( beta1 = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-       var1 = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
+x <- BSfactor(beta = c(0.0126, 5.005, 1.298, 0.000476),
+       se.beta = c(0.0504, 2.5811, 2.0541, 0.0026),
        beta0 = 0, reverse = TRUE )
 plot(x)
 }

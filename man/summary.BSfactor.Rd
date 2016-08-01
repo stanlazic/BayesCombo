@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary.BSfactor.R
 \name{summary.BSfactor}
 \alias{summary.BSfactor}
-\title{Summarize a BSfactor object}
+\title{Summarise a BSfactor object}
 \usage{
 \method{summary}{BSfactor}(object, ...)
 }
@@ -12,19 +12,20 @@
 \item{...}{Additional parameters not required}
 }
 \value{
-A summary of the BSfactor object passed.
+A summary of the BSfactor object.
 }
 \description{
 Gives summary of various sections of the BSfactor class.
 }
 \details{
-For all section of the BSfactor object which are matrices,
- the summary function will return the first and last rows with the values rounded to 4 decimal points.
- The summary also contains other key pieces of information such as boundary and threshold.
+For all section of the BSfactor object which are matrices, the
+summary function will return the first and last rows with the values rounded
+to 4 decimal points.  The summary also contains other key pieces of
+information such as boundary and threshold.
 }
 \examples{
-x <- BSfactor( beta1 = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-       var1 = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
+x <- BSfactor( beta = c(0.0126, 5.0052, 1.2976, 0.0005),
+       se.beta = c(0.050, 2.581, 2.054, 0.003),
        beta0 = 0, reverse = TRUE )
 summary(x)
 }

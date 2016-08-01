@@ -4,27 +4,30 @@
 \alias{prior.var}
 \title{Calculate the prior variances for the unconstrained model}
 \usage{
-prior.var(beta1, var1, beta0, pi0, percent = 99)
+prior.var(beta, se.beta, beta0, pi0, percent = 99)
 }
 \arguments{
-\item{beta1}{Vector of observed means}
+\item{beta}{Vector of observed effect sizes.}
 
-\item{var1}{Vector of observed variances}
+\item{se.beta}{Vector of standard errors for the effect sizes.}
 
-\item{beta0}{Vector or value of prior means (usually 0)}
+\item{beta0}{Vector or value of prior means (usually 0).}
 
-\item{pi0}{Vector of prior model probabilities}
+\item{pi0}{Vector of prior model probabilities.}
 
-\item{percent}{Confidence interval precentage}
+\item{percent}{Confidence interval percentage.}
 }
 \value{
 vector of equal length to that of the observed variances.
 }
 \description{
-Given a set of values for the observed mean,variance and the prior mean, a set of unconstrained prior variances are calculated.
+Given a set of values for the effect sizes and their standard
+errors a set of unconstrained prior variances are calculated. Not called
+directly by the user.
 }
 \details{
-The prior variances are calculated by getting the largest confidence interval from the prior mean by using the
-confidence interval of the observed values.
+The prior variances are calculated by getting the largest confidence
+interval from the prior mean by using the confidence interval of the observed
+values.
 }
 

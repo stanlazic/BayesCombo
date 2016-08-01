@@ -2,29 +2,35 @@
 % Please edit documentation in R/sample.prop.R
 \name{sample.prop}
 \alias{sample.prop}
-\title{Calculates sampling proportions for the unconstrained parameters and is called in the unconstrained.BF function.}
+\title{Calculates sampling proportions for the unconstrained parameters}
 \usage{
 sample.prop(n, prior.mean, posterior.mean, prior.sd, posterior.sd,
   hypothesis = 1)
 }
 \arguments{
-\item{n}{Number of times the distributions are sampled}
+\item{n}{Number of times the distributions are sampled.}
 
-\item{prior.mean}{Vector of unconstrained prior  model means. This is part of the BFcombo object}
+\item{prior.mean}{Vector of unconstrained prior model means. This is part of
+the BFcombo object.}
 
-\item{posterior.mean}{Vector of unconstrained posterior model means. This is part of the BFcombo object}
+\item{posterior.mean}{Vector of unconstrained posterior model means. This is
+part of the BFcombo object.}
 
-\item{prior.sd}{Vector of unconstrained prior model standard devidations. The variances are part of the BFcombo object}
+\item{prior.sd}{Vector of unconstrained prior model standard deviations. The
+variances are part of the BFcombo object.}
 
-\item{posterior.sd}{Vector of unconstrained posterior model standard devidations, The variances are part of the BFcombo object}
+\item{posterior.sd}{Vector of unconstrained posterior model standard
+devidations. The variances are part of the BFcombo object.}
 
-\item{hypothesis}{Choose the hypothesis to sample from}
+\item{hypothesis}{Choose the hypothesis to sample from.}
 }
 \description{
-Sampling the prior and posterior distributions given their means and variances
+Done using sampling with the prior and posterior means and
+variances.
 }
 \details{
-This function is called within the unconstrained.BF function in the BayesCombo package
+This function is called within the unconstrained.BF function and is
+not called directly by the user.
 }
 \seealso{
 \code{\link{unconstrained.BF}}

@@ -2,29 +2,29 @@
 % Please edit documentation in R/PMP.plot.R
 \name{PMP.plot}
 \alias{PMP.plot}
-\title{Plot of Posterior model probabilities}
+\title{Plot of posterior model probabilities}
 \usage{
 PMP.plot(BFcombo, pi0 = rep(1/3, 3))
 }
 \arguments{
-\item{BFcombo}{A object of the class BFcombo which contains the PMP section}
+\item{BFcombo}{A object of the class BFcombo which contains the PMP section.}
 
-\item{pi0}{Vector of prior model probabilities}
+\item{pi0}{Vector of prior model probabilities.}
 }
 \value{
 Plot of posterior model probabilities.
 }
 \description{
-Produces a visualisation of posteriror model probabilities by plotting the probabilities at each updating step.
+Plots the updated posterior model probabilities as each study
+is added to the total.
 }
 \details{
-There is a line for each hypothesis and the starting point is the prior model probabilities for each
-hypothesis.
+Each line is a hypothesis and they start at the prior model
+probabilities (usually 1/3).
 }
 \examples{
-x <- calculate.PMP(beta1 = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-       var1 = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
-    beta0 = 0, pi0 = rep(1/3,3) )
+x <- calculate.PMP( beta = c(0.0126, 5.0052, 1.2976, 0.0005),
+       se.beta = c(0.050, 2.581, 2.054, 0.003) )
 PMP.plot(x)
 }
 \seealso{
