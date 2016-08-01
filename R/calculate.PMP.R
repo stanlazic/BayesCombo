@@ -26,7 +26,7 @@
 calculate.PMP <- function(beta, se.beta, pi0 = rep(1 / 3, 3), beta0 = 0,
                             n = 10000, var.mult = 1, percent = 99) {
     BFcombo <- prior.var(beta = beta, se.beta = se.beta,
-                         beta0 = beta0, pi0 = pi0, 99)
+                         beta0 = beta0, pi0 = pi0, percent)
     BFcombo$percent <- percent
     BFcombo$var0 <- BFcombo$var0 * var.mult
     BFcombo <- u.post.param(BFcombo)
