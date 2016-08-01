@@ -1,4 +1,4 @@
-#' @title Calculate a 'Bayesian Safety (BS) factor'
+#' @title Calculate a 'Bayesian Safety (BS) factor
 #'
 #' @description Calculates the prior probability for the null that gives a just
 #' significant result.
@@ -31,22 +31,25 @@
 #' of reverse.
 #' @param reverse Changes the hypothesis in which the prior model probability
 #' increases. If this is TRUE then the value of the hypothesis parameter will
-#' determine the hypothesis which will increase in probability.
+#' determine which of the two non-null hypotheses will increase in probability.
+#' If FALSE, the value hypothesis will change the hypothesis for which the
+#' boundary is chosen whilst the null hypothesis will be increased
+#' in probability. Default is FALSE
 #'
 #'
 #' @return Object of class 'BSfactor' which contains a matrix of final posterior
 #' model probabilities, a matrix of prior model probabilities, the 'boundary'
 #' and which hypothesis is being considered.
 #'
-#' @seealso \code{\link{plot.BSfactor}
-#' 
+#' @seealso \code{\link{plot.BSfactor}}
+#'
 #' @importFrom methods is
 #'
 #' @export
 #' @examples
 #'
-#' x <- BSfactor(beta = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-#'        se.beta = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
+#' x <- BSfactor(beta = c(0.0126, 5.005, 1.298, 0.000476),
+#'        se.beta = c(0.0504, 2.5811, 2.0541, 0.0026),
 #'        beta0 = 0, reverse = TRUE )
 #'
 #' summary(x)

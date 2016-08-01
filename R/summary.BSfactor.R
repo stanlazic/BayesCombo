@@ -16,8 +16,8 @@
 #'
 #' @export
 #' @examples
-#' x <- BSfactor( beta = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-#'        se.beta = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
+#' x <- BSfactor( beta = c(0.0126, 5.0052, 1.2976, 0.0005),
+#'        se.beta = c(0.050, 2.581, 2.054, 0.003),
 #'        beta0 = 0, reverse = TRUE )
 #' summary(x)
 
@@ -40,7 +40,11 @@ summary.BSfactor <- function(object, ...) {
     colnames(priorMP) <- colnames(object$PMP)
 
     ### boundary
-    boundary <- round(object$boundary, 4)
+    if(is.null(object$boundary)){
+      boundary <- object$boundary <- NULL
+    } else{
+      boundary <- round(object$boundary, 4)
+    }
 
     ### threshold
     threshold <- round(object$threshold, 4)

@@ -11,20 +11,22 @@
 #'
 #' @return Plot of posterior model probabilities in relation to changes in the
 #' prior model probabilities.
-#' 
+#'
 #' @seealso \code{\link{BSfactor}}
-#' 
+#'
 #' @importFrom utils tail
 #' @export
 #' @examples
-#' x <- BSfactor( beta = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-#'        se.beta = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
+#' x <- BSfactor(beta = c(0.0126, 5.005, 1.298, 0.000476),
+#'        se.beta = c(0.0504, 2.5811, 2.0541, 0.0026),
 #'        beta0 = 0, reverse = TRUE )
 #' plot(x)
 
 plot.BSfactor <- function(x, ...) {
+    if(class(x) != "BSfactor"){
+      stop("Object must be of class BSfactor")
+    }
     namevec <- c("H:0", "H:>", "H:<")
-    
     plot(x = x$priorMP[, 1], y = x$PMP[, 1], type = "l",
          ylim = c(0, 1), col = "red",
          ylab = "Posterior model probability",
@@ -32,11 +34,11 @@ plot.BSfactor <- function(x, ...) {
          "prior model probability"),
          main = "Plot of posterior model probabilities
          vs changing prior model probabilities")
-    
+
     lines(x$priorMP[, 1], x$PMP[, 2], col = "blue")
     lines(x$priorMP[, 1], x$PMP[, 3], col = "green")
     abline(h = x$threshold, lty = 2)
-    
+
     legend("left", legend = c("H:0", "H:>", "H:<"),
            fill = c("red", "blue", "green"))
 }

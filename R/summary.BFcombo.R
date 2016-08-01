@@ -16,9 +16,8 @@
 #'
 #' @export
 #' @examples
-#' x <- calculate.PMP( beta = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-#'     se.beta = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
-#'     beta0 = 0, pi0 = rep(1/3,3) )
+#' x <- calculate.PMP( beta = c(0.0126, 5.0052, 1.2976, 0.0005),
+#'        se.beta = c(0.050, 2.581, 2.054, 0.003) )
 #' summary(x)
 
 
@@ -35,7 +34,7 @@ summary.BFcombo <- function(object, ...) {
 
         output$Observed <- data.frame(Min = Min_Obs, Max = Max_Obs)
         rownames(output$Observed) <- c("Mean", "Variance")
-        
+
     } else if (all(categ != "unBetaPost")) {
 
         output <- list(Observed = NULL, uPrior = NULL)
@@ -82,7 +81,7 @@ summary.BFcombo <- function(object, ...) {
         output$uPosterior <- data.frame(Min = Min_uPosterior,
                                         Max = Max_uPostVariance)
         rownames(output$uPosterior) <- c("Mean", "Variance")
-        
+
     } else if (all(categ != "PMP")) {
         output <- list(Observed = NULL, uPrior = NULL, uPosterior = NULL,
                        BFmu = NULL)
@@ -107,7 +106,7 @@ summary.BFcombo <- function(object, ...) {
         output$uPosterior <- data.frame(Min = Min_uPosterior,
                                         Max = Max_uPostVariance)
         rownames(output$uPosterior) <- c("Mean", "Variance")
-        
+
     } else if (any(categ == "PMP")) {
         output <- list(Observed = NULL, uPrior = NULL, uPosterior = NULL,
                        BFmu = NULL, PMP = NULL)
@@ -134,7 +133,7 @@ summary.BFcombo <- function(object, ...) {
         output$uPosterior <- data.frame(Min = Min_uPosterior,
                                         Max = Max_uPostVariance)
         rownames(output$uPosterior) <- c("Mean", "Variance")
-        
+
     } else {
         stop("Please use an input of class BFcombo")
     }

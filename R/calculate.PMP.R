@@ -1,50 +1,26 @@
-#' @title Calculate posterior model probabilities
+#' @title Calculate updated posterior model proababilities
 #'
-<<<<<<< HEAD
-#' @description Calculate the posterior model probabilities from the observed
-#' effect sizes and their standard errors.
-=======
-#' @description Wrapper function to caclulate the posterior model probabilities from the observed effect sizes and their respective variances.
->>>>>>> bc3ff0fc739b0e89bbf38afc008be33d6faede7d
+#' @description Calculate the posterior model probabilities from the observed effect sizes and their standard errors.
 #'
-#' @details Creates the BFcombo object from the inputs and of posterior model
+#' @details Creates the BFcombo object from the inputs and runs a pipeline to produce the complete set of posterior model
 #' probabilities given the inputs.
-#'
-<<<<<<< HEAD
+
 #' @param beta Vector of observed effect sizes.
-#' @param se.beta Vector of observed standard errors for the effect sizes.
-#' @param pi0 Vector of prior model probabilities specified in the following
-#' order: null, greater than zero, less than zero. The priors default to 1/3 for
-#' each.
-#' @param beta0 Vector or value of prior effect sizes (usually 0).
+#' @param se.beta Vector of observed standard errors.
+#' @param pi0 Vector of prior model probabilities.
+#' Specified in the following order: null, greater than zero, less than zero. The priors default to 1/3 for each.
+#' @param beta0 Vector or value of prior effect sizes.
 #' @param n Number of times distributions are sampled.
-#' @param var.mult Multiplier for the prior variances. Can be used to test the
-#' sensitivity of the results to the width of the prior.
-#' @param percent Sets the percentage of the confidence interval. Default is
-#' 99%.
-=======
-#' @param beta1 Vector of observed means
-#' @param var1 Vector of observed variances
-#' @param pi0 Vector of prior model probabilities
-#' @param beta0 Vector or value of prior means
-#' @param n Number of times distributions are sampled
-#' @param var.mult Multiplier of the prior variances
+#' @param var.mult Multiplier for the prior variances. Can be used to test the sensitivity of the results to the width of the prior.
 #' @param percent Sets the percentage of the confidence interval. Default is 99.
->>>>>>> bc3ff0fc739b0e89bbf38afc008be33d6faede7d
-#'
-#' @return Object of class BFcombo which contains a matrix of posterior model
-#' probabilities for each updated step.
-#' 
-#' @seealso \code{\link{prior.var} \link{u.post.param} \link{unconstrained.BF}
-#' \link{PMP.update}}
-#'
+
+#' @return Object of class BFcombo which contains a matrix of posterior model probabilities for each updated step.
+#' @seealso \code{\link{prior.var} \link{u.post.param} \link{unconstrained.BF} \link{PMP.update}}
+
 #' @export
 #' @examples
-#' x <- calculate.PMP(beta = c(0.0126474408, 5.0051724138, 1.2975612498, 0.0004762455),
-#'        se.beta = c(2.538974e-03, 6.662216e+00, 4.219142e+00, 6.963380e-06),
-#'     beta0 = 0, pi0 = rep(1/3,3) )
-#'
-#' summary(x)
+#' x <- calculate.PMP( beta = c(0.0126, 5.0052, 1.2976, 0.0005),
+#'        se.beta = c(0.050, 2.581, 2.054, 0.003) )
 
 
 calculate.PMP <- function(beta, se.beta, pi0 = rep(1 / 3, 3), beta0 = 0,
@@ -56,6 +32,5 @@ calculate.PMP <- function(beta, se.beta, pi0 = rep(1 / 3, 3), beta0 = 0,
     BFcombo <- u.post.param(BFcombo)
     BFcombo <- unconstrained.BF(BFcombo, n)
     PMP <- PMP.update(BFcombo)
-
-    return(PMP)
+    PMP
 }
