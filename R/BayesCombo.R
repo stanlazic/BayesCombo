@@ -6,9 +6,10 @@
 #'
 #' @details The study design has 4 sets of 7 mice, a sham group ,
 #' a TSC22D4-knockout group, a LCN13-knockout and a TSC22D4-knockout LCN13-knockout group.
-#' Only the sham and the TSC22D4-knockout group are used in this data set.
+#' Only the sham and the TSC22D4-knockout group are used in this data set. Due to file size
+#' 60 % of rows are randomly selected from the original dataset.
 #'
-#' @format A data frame with 25206 rows of gene probes and 18 columns.
+#' @format A data frame with 15124 rows of gene probes and 18 columns.
 #' \describe{
 #'   \item{beta.sk:}{The effect size from the gene expression output for the skeletal muscle tissue.}
 #'   \item{beta.ab:}{The effect size from the gene expression output for the abdominal fat tissue.}
