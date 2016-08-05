@@ -22,12 +22,12 @@
 
 PMP.plot <- function(BFcombo, ...) {
 
-    BFcombo$PMP <- cbind(BFcombo$pi0, BFcombo$PMP)
-
-    matplot(t(BFcombo$PMP), type="l", col=c("red","green","blue"), lty=1,
-            ylim = c(0, 1), col = "red", ylab = "Probability", xlab = "Study",
-            ...)
-
-    legend("topleft", legend = c("H:0", "H:>", "H:<"),
-           fill = c("red", "blue", "green"))
+  BFcombo$PMP <- cbind(BFcombo$pi0, BFcombo$PMP)
+  n<- length(BFcombo$PMP[1,])
+  matplot(t(BFcombo$PMP), type="l", col=c("red","green","blue"), lty=1,
+          ylim = c(0, 1), ylab = "Probability", xlab = "Study", xaxt = "n",
+          ...)
+  axis(1, at = 1:n, labels = 0:(n-1))
+  legend("topleft", legend = c("H:0", "H:>", "H:<"),
+         fill = c("red", "blue", "green"))
 }
