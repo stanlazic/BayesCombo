@@ -4,12 +4,12 @@
 \alias{PMP.plot}
 \title{Plot of posterior model probabilities}
 \usage{
-PMP.plot(BFcombo, pi0 = rep(1/3, 3))
+PMP.plot(BFcombo, ...)
 }
 \arguments{
-\item{BFcombo}{A object of the class BFcombo which contains the PMP section.}
+\item{BFcombo}{A object of the class BFcombo.}
 
-\item{pi0}{Vector of prior model probabilities.}
+\item{...}{Other options to pass to \code{plot()}.}
 }
 \value{
 Plot of posterior model probabilities.
