@@ -6,8 +6,8 @@
 #' @details Each line is a hypothesis and they start at the prior model
 #' probabilities (usually 1/3).
 #'
-#' @param BFcombo A object of the class BFcombo which contains the PMP section.
-#' @param pi0 Vector of prior model probabilities.
+#' @param BFcombo A object of the class BFcombo.
+#' @param ... Other options to pass to \code{plot()}.
 #'
 #' @return Plot of posterior model probabilities.
 #'
@@ -20,17 +20,13 @@
 #'        se.beta = c(0.050, 2.581, 2.054, 0.003) )
 #' PMP.plot(x)
 
-PMP.plot <- function(BFcombo) {
+PMP.plot <- function(BFcombo, ...) {
 
-    n.studies <- ncol(BFcombo$PMP)
     BFcombo$PMP <- cbind(BFcombo$pi0, BFcombo$PMP)
 
-    plot(x = 0:n.studies, y = BFcombo$PMP[1, ], type = "l", ylim = c(0, 1),
-         col = "red", ylab = "Probability", xlab = "PMP",
-         main = "Plot of PMP probabilities and initial PrMP")
-
-    lines(0:n.studies, BFcombo$PMP[2, ], col = "blue")
-    lines(0:n.studies, BFcombo$PMP[3, ], col = "green")
+    matplot(t(BFcombo$PMP), type="l", col=c("red","green","blue"), lty=1,
+            ylim = c(0, 1), col = "red", ylab = "Probability", xlab = "Study",
+            ...)
 
     legend("topleft", legend = c("H:0", "H:>", "H:<"),
            fill = c("red", "blue", "green"))
