@@ -20,10 +20,10 @@
 #'        se.beta = c(0.050, 2.581, 2.054, 0.003) )
 #' PMP.plot(x)
 
-PMP.plot <- function(BFcombo, pi0 = rep(1 / 3, 3)) {
+PMP.plot <- function(BFcombo) {
 
     n.studies <- ncol(BFcombo$PMP)
-    BFcombo$PMP <- cbind(pi0, BFcombo$PMP)
+    BFcombo$PMP <- cbind(BFcombo$pi0, BFcombo$PMP)
 
     plot(x = 0:n.studies, y = BFcombo$PMP[1, ], type = "l", ylim = c(0, 1),
          col = "red", ylab = "Probability", xlab = "PMP",
