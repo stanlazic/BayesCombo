@@ -54,10 +54,10 @@ summary.BFcombo <- function(object, ...) {
                                  max(object$var0)), digits = 4)
 
         output$Observed <- data.frame(Min = Min_Obs, Max = Max_Obs)
-        rownames(output$Observed) <- c("Mean", "Variance")
+        rownames(output$Observed) <- c("Effect size", "Variance")
 
         output$uPrior <- data.frame(Min = Min_uPrior, Max = Max_uVariance)
-        rownames(output$uPrior) <- c("Mean", "Variance")
+        rownames(output$uPrior) <- c("Effect size", "Variance")
 
     } else if (all(categ != "BFmu")) {
         output <- list(Observed = NULL, uPrior = NULL, uPosterior = NULL)
@@ -75,12 +75,12 @@ summary.BFcombo <- function(object, ...) {
         Max_uPostVariance <- round(c(max(object$unBetaPost),
                                      max(object$unVarPost)), digits = 4)
         output$Observed <- data.frame(Min = Min_Obs, Max = Max_Obs)
-        rownames(output$Observed) <- c("Mean", "Variance")
+        rownames(output$Observed) <- c("Effect size", "Variance")
         output$uPrior <- data.frame(Min = Min_uPrior, Max = Max_uVariance)
-        rownames(output$uPrior) <- c("Mean", "Variance")
+        rownames(output$uPrior) <- c("Effect size", "Variance")
         output$uPosterior <- data.frame(Min = Min_uPosterior,
                                         Max = Max_uPostVariance)
-        rownames(output$uPosterior) <- c("Mean", "Variance")
+        rownames(output$uPosterior) <- c("Effect size", "Variance")
 
     } else if (all(categ != "PMP")) {
         output <- list(Observed = NULL, uPrior = NULL, uPosterior = NULL,
@@ -99,13 +99,13 @@ summary.BFcombo <- function(object, ...) {
                                      max(object$unVarPost)), digits = 4)
         output$BFmu <- round(object$BFmu, digits = 4)
         output$Observed <- data.frame(Min = Min_Obs, Max = Max_Obs)
-        rownames(output$Observed) <- c("Mean", "Variance")
+        rownames(output$Observed) <- c("Effect size", "Variance")
         output$uPrior <- data.frame(Min = Min_uPrior,
                                     Max = Max_uVariance)
-        rownames(output$uPrior) <- c("Mean", "Variance")
+        rownames(output$uPrior) <- c("Effect size", "Variance")
         output$uPosterior <- data.frame(Min = Min_uPosterior,
                                         Max = Max_uPostVariance)
-        rownames(output$uPosterior) <- c("Mean", "Variance")
+        rownames(output$uPosterior) <- c("Effect size", "Variance")
 
     } else if (any(categ == "PMP")) {
         output <- list(Observed = NULL, uPrior = NULL, uPosterior = NULL,
@@ -126,13 +126,13 @@ summary.BFcombo <- function(object, ...) {
         output$PMP <- round(object$PMP, digits = 4)
         output$Observed <- data.frame(Min = Min_Obs,
                                       Max = Max_Obs)
-        rownames(output$Observed) <- c("Mean", "Variance")
+        rownames(output$Observed) <- c("Effect size", "Variance")
         output$uPrior <- data.frame(Min = Min_uPrior,
                                     Max = Max_uVariance)
-        rownames(output$uPrior) <- c("Mean", "Variance")
+        rownames(output$uPrior) <- c("Effect size", "Variance")
         output$uPosterior <- data.frame(Min = Min_uPosterior,
                                         Max = Max_uPostVariance)
-        rownames(output$uPosterior) <- c("Mean", "Variance")
+        rownames(output$uPosterior) <- c("Effect size", "Variance")
 
     } else {
         stop("Please use an input of class BFcombo")
