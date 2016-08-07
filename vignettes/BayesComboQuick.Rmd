@@ -66,82 +66,22 @@ PMP.plot(pmp)
 
 ## Bayesian Safety (BS) factor
 
-When the posterior probability for a non-null hypothesis is large, it may be of interest to calculate the prior for the null that gives a just  significant result. Here 'significant' is a threshold that the posterior must exceed. For example, if a series of experiments on homeopathy gives a posterior probability of 0.98 in favour homeopathy's effectiveness, we can calculate the strength of the prior needed to make the posterior just pass the 0.98 threshold. If the BS factor is very large (sceptical prior), then we may be more inclined to believe the results because they were sufficient to shift a strong prior belief in no effect. If the data can only overcome a weak prior, then the results may be unconvincing, despite having a large posterior probability. We can ask ourselves if our prior is greater or less than the BS factor, and judge the results accordingly.
+When the posterior probability for a non-null hypothesis is large, it may be of interest to calculate the prior for the null that gives a just significant result. Here, 'significant' is a threshold that the posterior must exceed before we consider it credible, and 0.95 is a convenient value. Suppose a series of homeopathy experiments gives a posterior probability of 0.98 in favour homeopathy's effectiveness. We can calculate the strength of the prior needed to make the posterior just pass a threshold of 0.95. If the BS factor is very large (sceptical prior), then we may be more inclined to believe the results because they were enough to shift a strong prior belief in no effect. If the data can only overcome a weak prior, then the results may be unconvincing, despite having a large posterior probability. We can ask ourselves if our prior for the null is greater or less than the BS factor, and judge the results accordingly. It is often easier to state if your prior is above or below a value compared with specifying the prior itself.
 
-given a threshold, how much weight you can give a certain hypothesis in the prior model probabilities. This can aid making a conclusion on the outcome of the standard analysis. 
-
-
-**n** 
-
-This is the number of steps from 0.33333 to 0.99999 which the prior model probabilities will take. The default is 100. 
-
-**threshold** 
-
-This is a value between 0 and 1 which will be used to set the boundary point at which the PMP value is less than as the prior model probabilities change. The default is 0.95. 
-
-**hypothesis**
-
-This has two properties depending on the value of the `reverse` parameter.
-
-When reverse is `TRUE` the value of hypothesis refers to the hypothesis which will be tested against the null. That is to say the given this hypothesis one can give the null hypothesis a certain amount of weight until the result of the analysis changes drastically.
-
-
-When reverse is `FALSE` the value of hypothesis refers to the hypothesis which will be added weight instead of the null hypothesis. The null is then used to set the boundary. 
-The default value for hypothesis is 1. It can take 2 as another input. 
-
-
-**reverse**
-
-See hypothesis parameter for a detailed description. 
-
-Default value of reverse is `TRUE`.
-
-
-
-#### Example
+The code below takes the output from the `calculate.PMP()` function and calculates the BS factor. The key output is the `boundary` section, which shows that a null prior of 0.58 (and 0.21 for each of the alternatives) will give a posterior just above 0.95. As this is a weak prior, we do not consider the results convincing. 
 
 ```{r BSfactor}
-bs <- BSfactor(pmp, reverse = TRUE , n = 12 )
-
+bs <- BSfactor(pmp, threshold = 0.95 )
 summary(bs)
 ```
 
-
-The output of summary consists of a list with the following sections:
-
-**PMP**
-
-Gives the first and the last row of the posterior model probabilities, these correspond to the prior model probabilities in the priorMP section.
-
-**priorMP**
-
-Gives the first and the last row of the prior model probabilities, these correspond to the posterior model probabilities in the PMP section.
-
-**boundary**
-
-Gives the boundary value when the PMP value reaches the threshold.
-
-**threshold**
-
-The threshold used to give the boundary.
-
-**hypothesis**
+The plot below shows how the posterior model probabilities for each hypothesis change as the prior for the null increases.
 
 
-
-
-
-#### Plot For "BSfactor" object
-
-Plot when used on a object of class "BSfactor" will give a visualisation of the change in posterior model probability values for each hypothesis as the prior model probabilities are changed. 
-
-
-```{r plotBS, fig.height=4,fig.width=8}
+```{r plotBS, fig.height=4,fig.width=6}
+par(las=1)
 plot(bs)
 ```
-
-
-
 
 # References 
 
