@@ -1,0 +1,7 @@
+name	user	system	elapsed
+BSfactor	0.112	0.000	0.110	
+forestplot	0.007	0.000	0.005	
+plot.PMP	0.006	0.000	0.007	
+plot.PMPlist	0.003	0.000	0.004	
+pmp	0.003	0.000	0.001	
+pmp.update	0.004	0.000	0.004	

@@ -1,0 +1,9 @@
+BSfactor                            Calculate a 'Bayesian Safety' (BS) factor
+GEdata                              Gene expression data set
+calc.post.beta                      Utility functions
+forestplot                          Forest plot
+plot.PMP                            Plot of prior, data, and posterior distributions
+plot.PMPlist                        Plot of posterior model probabilities
+pmp                                 Calculates posterior model probabilities for one study
+pmp.update                          Calculates posterior model probabilities for multiple studies
+summary.PMP                         Print and summary for PMP, PMPlist, and BSfactor objects
