@@ -1,11 +1,11 @@
-#' @title Print and summary for PMP, PMPlist, and BSfactor objects
+#' @title Print and summary methods for PMP, PMPlist, and BSfactor objects
 #'
 #' @description Print and summary methods for PMP, PMPlist, BSfactor objects.
 #'
 #' @param x A \code{PMP}, \code{PMPlist}, or \code{BSfactor} object.
 #' @param digits Number of digits to show.
 #'
-#' @return A list of posterior model probabilities and calculated values.
+#' @return A list of posterior model probabilities and other calculated values.
 #' @method summary PMP
 
 # summarise one study

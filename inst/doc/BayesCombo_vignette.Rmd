@@ -1,8 +1,10 @@
 ---
 title: "BayesCombo: A Quick Guide"
 author: "Bruno Contrino & Stanley E. Lazic"
-date: "20 Sept 2016"
-output: 
+date: "11 Dec 2016"
+output:
+  pdf_document:
+    number_sections: FALSE
   rmarkdown::html_vignette:
     toc: true
     number_sections: FALSE
@@ -22,41 +24,66 @@ library(BayesCombo)
 
 # Introduction 
 
-Multiple experiments are often used to test hypotheses, evaluate theories, or draw conclusions. Both the types of experiments and the measured outcomes can be diverse, and conclusions are usually based on the number of significant p-values across experiments. P-values, however, are a poor way of testing hypotheses, and since statistical power is often low, "conflicting results" are common. In addition, the diversity of methods makes it hard to formally combine results with a standard meta-analysis. Informal methods of evaluating a series of experiments makes inefficient use of the data and can lead to incorrect conclusions and poor decisions. Here we show how to combine evidence &#8211; captured by Bayes factors &#8211; across diverse experiments based on a method developed by Kuiper et al.[1]. 
+Scientists often evaluate theories or draw conclusions by combining results from multiple experiments. The experiments and the measured outcomes are usually diverse, making a meta-analyses inappropriate, and researchers therefore base conclusions on the number of p-values that are are in line with hypotheses. P-values, however, are a poor way of integrating results, and since statistical power is often low, "conflicting results" are common. Informal methods of evaluating a series of experiments makes inefficient use of the data and can lead to incorrect conclusions and poor decisions. Here we show how to combine diverse evidence across diverse experiments based on a method developed by Kuiper et al.[1]. 
 
-
+ &#8211;
 
 # Usage 
 
-The required inputs to calculate Bayes factors are coefficients and their standard errors obtained from the output of `lm()` and `glm()` functions (e.g. from ANOVAs, t-tests, or regressions with Gaussian, Poisson, or Binomial outcomes). It's up to the user to ensure that the data being combined are testing the same overall hypothesis or theory. In addition, the direction of the effects should be aligned; for example, if a positive effect size in one study is interpreted as supporting a theory, but a negative effect size in another study also supports the theory, then the negative effect should be multiplied by -1 to change its direction.
+The required inputs are coefficients and their standard errors obtained from the output of `lm()` and `glm()` functions (e.g. from ANOVAs, t-tests, or regressions with Gaussian, Poisson, or binomial outcomes). It's up to the user to ensure that the data being combined are testing the same overall hypothesis or theory. In addition, the direction of the effects should be aligned; for example, if a positive effect size in one study is interpreted as supporting a theory, but a negative effect size in another study also supports the theory, then the negative effect should be multiplied by -1 to change its direction.
 
 The Bayes factors are not used directly but only as an intermediate step to calculate the probability that the true effect size is less than zero, greater than zero, or exactly zero. These three probabilities are called the posterior model probabilities (PMPs), where a model corresponds to one of the three effects.
 
-## Plot single
-```{r, plotsingle, fig.height=5, fig.width=5}
-par(las=1)
-x <- pmp(beta=-0.252, se.beta=0.099)
-summary(x)
 
-plot(x, leg.loc="topright")
+## Posterior probability for a single study
+The figure below plots the raw data for an experiment where 20 rats were randomised to one of four treatment groups (dose of the antidepressant fluoxetine given in the drinking water).
 
-x2 <- pmp(beta=-0.252, se.beta=0.099, var.mult=2)
-summary(x2)
 
-plot(x2, leg.loc="topright")
+```{r, fig.height=4, fig.width=4}
+library(labstats)
+lattice::xyplot(time.immob ~ dose, data=fluoxetine, type=c("g","p","r"))
 ```
 
-## Calculate posterior model probabilities (PMPs)
+Suppose we conduct a simple experiment with a difference between groups of -0.252 and a standard error of 0.099. We can calculate the probability that this difference is negative, positive, or zero, using the `pmp()` function. Below, the default settings are used and the output shows that the probability that the difference is negative (`H<`) is 0.92, that it is positive (`H>`) is 0.01, and that it is exactly zero (`H0`) is 0.08. 
 
-`pmp.update()` is the main analysis function and only requires the effect sizes (`beta`) and their standard errors (`se.beta`) as input. The default prior mean (`beta0 = 0`) is suitable for most analyses, as is the equal prior model probabilities (`mod.priors =c(1/3, 1/3, 1/3)`) for each model. In the example below, assume we have four clinical trials where positive effect sizes indicate a beneficial effect of a treatment.
 
 ```{r}
-x <- pmp.update(beta = c(2.3, 1.2, 0.2, 0.44),
+summary(lm(time.immob ~ dose, data=fluoxetine))$coef
+
+x <- pmp(beta = -0.252, se.beta = 0.099, percent=95)
+summary(x)
+```
+
+The plot below shows the data, the default prior, and the posterior distributions. The mean of the data (dotted line) is centred on -0.252 and the standard error determines the width of this distribution. The `pmp()` function calculates a default prior with a mean of zero and variance such that the 99% confidence interval (CI) of the prior matchs the 99% CI of the data distribution. The PMPs are then calculated from these prior and posterior distributions. 
+
+```{r, fig.height=5, fig.width=5}
+par(las=1)
+plot(x, leg.loc = "topright")
+```
+
+The above default prior may be more informative than desired (note how the posterior is pulled towards the prior) and the easiest way to decrease the influence of the prior is to make it wider by specifying a variance multiplier. The code below doubles the previous variance (`var.mult = 2`), and the posterior is now much closer to the data distribution. However, the PMPs have not changed much, rounded to two decimal places the probability that the difference is negative is still 0.92.
+
+
+```{r, fig.height=5, fig.width=5}
+x2 <- pmp(beta = -0.252, se.beta = 0.099, var.mult = 2)
+summary(x2)
+
+par(las=1)
+plot(x2, leg.loc = "topright")
+```
+
+## Posterior probability for multiple studies
+
+PMPs from several studies can be combined to 
+`pmp.combo()` is the main analysis function and only requires the effect sizes (`beta`) and their standard errors (`se.beta`) as input. The default prior mean (`beta0 = 0`) is suitable for most analyses, as is the equal prior model probabilities (`mod.priors = c(1/3, 1/3, 1/3)`) for each model (positive, negative, or zero difference). In the example below, assume we have four clinical trials where positive effect sizes indicate a beneficial effect of a treatment.
+
+```{r}
+x <- pmp.combo(beta = c(2.3, 1.2, 0.2, 0.44),
 	              se.beta = c(1.03, 0.75, 0.16, 0.28))
 ```
 
 
-Plotting a `PMPlist` object generates a graph resembling a forest plot, with the observed effect sizes and their 99% CI (black) and the prior effect sizes (usually zero) and their variances (red). All four studies have positive effect sizes but only the first study is significant at the usual 0.05 level.
+Plotting a `PMPlist` object generates a graph resembling a forest plot, with the observed effect sizes and their 99% CI (black)[CHECK] and the prior effect sizes (usually zero) and their variances (red). All four studies have positive effect sizes but only the first study is significant at the usual 0.05 level.
 
 
 ```{r fig.height=5, fig.width=5}
@@ -86,19 +113,6 @@ dotchart(x$pmp.uniform, xlim=c(0,1), xlab="PMP")
 dotchart(t(x$pmp.uniform), xlim=c(0,1), xlab="PMP")
 ```
 
-
-
-
-## Bayesian Safety (BS) factor
-
-When the posterior probability for a non-null hypothesis is large, it may be of interest to calculate the prior for the null that gives a just significant result. Here, 'significant' is a threshold that the posterior must exceed before we consider it credible, and 0.95 is a convenient value. Suppose a series of homeopathy experiments gives a posterior probability of 0.98 in favour homeopathy's effectiveness. We can calculate the strength of the prior needed to make the posterior just pass a threshold of 0.95. If the BS factor is very large (sceptical prior), then we may be more inclined to believe the results because they were enough to shift a strong prior belief in no effect. If the data can only overcome a weak prior, then the results may be unconvincing, despite having a large posterior probability. We can ask ourselves if our prior for the null is greater or less than the BS factor, and judge the results accordingly. It is often easier to state if your prior is above or below a value compared with specifying the prior itself.
-
-The code below takes the output from the `calculate.PMP()` function and calculates the BS factor. The key output is the `boundary` section, which shows that a null prior of 0.58 (and 0.21 for each of the alternatives) will give a posterior just above 0.95. As this is a weak prior, we do not consider the results convincing. 
-
-```{r BSfactor}
-bs <- BSfactor(x, sig = 0.95 )
-summary(bs)
-```
 
 
 # References 

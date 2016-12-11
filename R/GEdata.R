@@ -1,33 +1,30 @@
 #' @title Gene expression data set
 #'
-#' @description Effect sizes and standard errors for an Affymetrix microarray experiment. Only subset of the full experiment is used and the results are for two experimental groups in two different tissues.
+#' @description Effect sizes and standard errors for an Affymetrix microarray
+#' experiment. Only subset of the full experiment is used and the results are
+#' for two experimental groups in two different tissues.
 #'
-#' @details The study design has 4 sets of 7 mice, a sham group, a
-#' TSC22D4-knockout group, a LCN13-knockout and a TSC22D4-knockout
-#' LCN13-knockout group. Only the sham and the TSC22D4-knockout group
-#' are used in this data set.
-
+#' @details The full experiment has 4 groups of 7 mice and only the sham and the
+#' TSC22D4-knockout group are used here.
 #'
-#' @format A data frame with 25206 rows of gene probes and 7 columns:
+#' @format A data frame with 25206 rows of genes (probe sets) and 7 columns:
 #' \describe{
 #'
 #'  \item{probeset:}{Affymetrix probe set ID.}
 #'
-#'  \item{beta.sk:}{The effect size from the gene expression output
-#' for the skeletal muscle tissue.}
+#'  \item{beta.sk:}{The effect size in skeletal muscle tissue.}
 #'
-#'  \item{beta.ab:}{The effect size from the gene expression output
-#' for the abdominal fat tissue.}
+#'  \item{beta.ab:}{The effect size in abdominal fat tissue.}
 #'
-#' \item{se.sk:}{The standard error from the gene expression output
-#' for the skeletal muscle tissue.}
+#' \item{se.sk:}{The standard error for the effect size in skeletal muscle
+#' tissue.}
 #'
-#' \item{se.ab:}{The standard error from the gene expression output
-#' for the abdominal fat tissue.}
+#' \item{se.ab:}{The standard error for the effect size in abdominal fat
+#' tissue.}
 #'
-#' \item{Aexprs.sk:}{Average expression in skeletal muscle.}
+#' \item{Aexprs.sk:}{Average gene expression level in skeletal muscle.}
 #'
-#' \item{Aexprs.ab:}{Average expression in abdominal fat.}
+#' \item{Aexprs.ab:}{Average gene expression leve in abdominal fat.}
 #' }
 #'
 #' @references Friedrich K, Jones A, Seibert O, Sijmonsma TP, Wang X, Sticht C,

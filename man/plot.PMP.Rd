@@ -10,12 +10,15 @@
 \arguments{
 \item{x}{A \code{PMP} object created by the \code{pmp()} function.}
 
-\item{range}{A numeric vector of length two that sets the range of the x-axis. Values are passed to \code{xlim}. Sensible values are used default when \code{range=NULL}.}
+\item{range}{A numeric vector of length two that sets the range of the
+x-axis. Values are passed to \code{xlim}. Sensible default values are used
+when \code{range = NULL}.}
 
-\item{n}{An integer that specifies the number of x-values use when plotting the distributions.}
+\item{n}{An integer that specifies the number of x-values to use when
+plotting the distributions.}
 
 \item{leg.loc}{Location of the legend; default is top left. See the
-\code{legend} help pages for all the options. If \code{leg.loc = NULL} the
+\code{legend()} help pages for all the options. If \code{leg.loc = NULL} the
 legend is not plotted.}
 
 \item{xlab, ylab}{Text for the x and y axes labels.}
@@ -29,7 +32,8 @@ Plot of distributions.
 Plots the results from a single study.
 }
 \details{
-Plots the prior, data (likelihood), and posterior distribution calculated from the pmp() function for a single study.
+Plots the prior, data (likelihood), and posterior distribution
+calculated from the \code{pmp()} function for a single study.
 }
 \examples{
 x <- pmp(beta = 5.005, se.beta = 2.05)

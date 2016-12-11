@@ -6,7 +6,7 @@
 \alias{summary.BSfactor}
 \alias{summary.PMP}
 \alias{summary.PMPlist}
-\title{Print and summary for PMP, PMPlist, and BSfactor objects}
+\title{Print and summary methods for PMP, PMPlist, and BSfactor objects}
 \usage{
 \method{summary}{PMP}(x, digits = 4)
 
@@ -24,7 +24,7 @@
 \item{digits}{Number of digits to show.}
 }
 \value{
-A list of posterior model probabilities and calculated values.
+A list of posterior model probabilities and other calculated values.
 }
 \description{
 Print and summary methods for PMP, PMPlist, BSfactor objects.

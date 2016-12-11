@@ -2,12 +2,11 @@
 #'
 #' @description Not called directly by user.
 #'
-#' @param beta  An numeric effect size.
-#' @param se.beta  A numeric standard error of the effect.
-#' @param beta0  A numeric prior value for the effect size.
-#' @param se0 A numeric prior variance.
-#' @param percent A numeric value that is used to calculate the prior
-#' variance.
+#' @param beta  Effect size.
+#' @param se.beta Standard error of the effect.
+#' @param beta0  Prior for the effect size.
+#' @param se0 Prior standard error.
+#' @param percent A numeric value that is used to calculate the prior variance.
 #' 
 # posterior mean (standard Bayesian updating for normal conjugate prior)
 calc.post.beta <- function(beta, se.beta, beta0, se0){

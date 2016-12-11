@@ -2,7 +2,6 @@
 
 S3method(plot,PMP)
 S3method(plot,PMPlist)
-export(BSfactor)
 export(forestplot)
 export(pmp)
-export(pmp.update)
+export(pmp.combo)

@@ -4,24 +4,27 @@
 \alias{pmp}
 \title{Calculates posterior model probabilities for one study}
 \usage{
-pmp(beta, se.beta, beta0 = 0, percent = 99, var.mult = 1, H0 = c(0, 0),
-  mod.priors = rep(1/3, 3), scale = FALSE, adjust = FALSE,
+pmp(beta, se.beta, beta0 = 0, se0 = NULL, percent = 99, var.mult = 1,
+  H0 = c(0, 0), mod.priors = rep(1/3, 3), scale = FALSE, adjust = FALSE,
   epsilon = 1e-06, adj.factor = 1e-04)
 }
 \arguments{
-\item{beta}{An numeric effect size.}
+\item{beta}{Effect size.}
 
-\item{se.beta}{A numeric standard error of the effect.}
+\item{se.beta}{Standard error for the effect.}
 
-\item{beta0}{A numeric prior value for the effect size. Default is zero.}
+\item{beta0}{A prior value for the effect size. Default is zero.}
 
-\item{percent}{A numeric value that is used to calculate the prior
-variance. The default value of 99 calculates the prior variance so that the
-99% confidence intervals of the prior are aligned with the largest (furthest
-from zero) confidence intervals of the data distribution.}
+\item{se0}{A prior standard error for the effect size. Default is \code{NULL}
+and is calculated automatically.}
+
+\item{percent}{Is used to calculate the prior variance if \code{se0 =
+NULL}. The default value of 99 calculates the prior variance so that the 99%
+confidence intervals of the prior distribution are aligned with the largest
+(furthest from zero) confidence interval of the data distribution.}
 
 \item{var.mult}{Variance multiplier used to increase or decrease the prior
-variance.}
+variance. Used in conjunction with \code{percent} when \code{se0 = NULL}.}
 
 \item{H0}{A vector of length two that defines the null hypothesis. If the
 values are identical (e.g. \code{H0 = c(0,0)}) a point null is used,
@@ -31,25 +34,25 @@ otherwise the null is defined as the range between the lower and upper value.}
 of 1/3.}
 
 \item{scale}{Logical. Whether to scale the effect size by its standard
-error. This has no effect on the calculations but it may be useful to use
-standardised effect sizes.}
+error. Standardising has no effect on the calculations but standardised
+effect sizes may be easier to compare in a forest plot.}
 
-\item{adjust}{Logical, whether to adjust the posterior model probabilities if
-they are too small. When combining multiple studies, this prevents a single
-study from having too much influence on the results. For example, if the
-probability for a hypothesis is zero, then additional studies cannot alter
-this probability.}
+\item{adjust}{Logical. Whether to adjust very small posterior model
+probabilities. Adjusting prevents a single study from having too much
+influence on the results when combining multiple studies. For example, if the
+probability for a hypothesis from one study is zero, then additional studies
+cannot alter this probability (multiplying anything by zero is still zero).}
 
-\item{epsilon}{A small value that a posterior model probability must be below
-before an adjustment is made.}
+\item{epsilon}{A small value that a posterior model probability must fall
+below before an adjustment is made. Ignored if \code{adjust = FALSE}.}
 
 \item{adj.factor}{A small number added to each posterior model probability if
-\code{adjust=TRUE} and a PMP is less than \code{epsilon}. The PMPs are then
-re-scaled to sum to one.}
+\code{adjust = TRUE} and one of the posterior model probabilities is less
+than \code{epsilon}. The PMPs are then re-scaled to sum to one.}
 }
 \value{
 Object of class \code{pmp} which contains the posterior model
-probabilities and other calculate values.
+probabilities and other calculated values.
 }
 \description{
 The function takes a single effect size and a its standard error
@@ -58,22 +61,24 @@ effect size is less than 0, H0: the effect size is zero, or H>: the effect
 size is greater than zero).
 }
 \details{
-Effect sizes are typically a mean difference between groups, a
-regression slope, odds ratio, and so on, that are provided by generalised
-linear models. The standard errors for the effect size are provided in the
-output from functions that calculate the effect size. Two types of priors
-need to be specified. The first is the prior for the effect size, which is
-given by a mean (usually zero) and variance, which is calculated
-automatically. Second, prior probabilities for each hypothesis need to be
-provided, and an equal probability of 1/3 is used by default.
+Effect sizes could be a mean difference between groups, regression
+slope, odds ratio, or other values provided by statistical models. The
+standard errors represent the uncertainty in the effect size and are provided
+by most statistical software.
+
+Two types of priors need to be specified. The first is the prior for the
+effect size, which is given by a mean (usually zero) and variance, which can
+be specified by the user or calculated automatically. Second, prior
+probabilities for each hypothesis need to be provided, and an equal
+probability of 1/3 is used by default.
 
 The null hypothesis (usually effect size = 0) can be specified as either a
-point null or as a range. A point null tests if effect size is \emph{exactly}
-zero while the range null tests if the effect size close enough to zero for
-practical purposes. "Close enough" is defined by the user as a range on
-either size of zero.
+point null or as a range. A point null tests if the effect size is
+\emph{exactly} zero while the range null tests if the effect size close
+enough to zero for practical purposes. 'Close enough' is defined by the user
+as a range on either size of zero.
 
-To combine multiple effect sizes use the \code{pmp.update} function.
+To combine multiple effect sizes use the \code{pmp.combo} function.
 }
 \examples{
 # library(labstats) # need to install separately
@@ -83,6 +88,6 @@ x <- pmp(beta=-0.25200, se.beta=0.09913) # dose effect from above output
 x
 }
 \seealso{
-\code{\link{plot.PMP}}, \code{\link{pmp.update}}
+\code{\link{plot.PMP}}, \code{\link{pmp.combo}}
 }
 
