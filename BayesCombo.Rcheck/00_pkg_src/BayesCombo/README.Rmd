@@ -1,9 +1,0 @@
----
-output:
-  md_document:
-    variant: markdown_github
----
-
-# BayesCombo: Bayesian Evidence Combination
-
-A work in progress...
