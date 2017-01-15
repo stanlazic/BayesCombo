@@ -104,7 +104,10 @@ pmp <- function(beta, se.beta, beta0 = 0, se0 = NULL, percent = 99,
         stop("percent must lie between zero and one.")
     }
 
-    se0 <- prior.se(beta, se.beta, percent) * var.mult
+    if (is.null(se0)){ # calculate if not given
+        se0 <- prior.se(beta, se.beta, percent) * var.mult
+    }
+    
     post.b <- calc.post.beta(beta, se.beta, beta0, se0)
     post.se <- calc.post.se(se.beta, se0)
 

@@ -5,10 +5,11 @@
 #' (H<: the effect size is less than 0, H0: the effect size is zero, or H>: the
 #' effect size is greater than zero).
 #'
-#' @details This function calls \code{pmp()} once for each study to be
-#' combined where the posterior model probabilities for one study are used as
-#' the priors for the next study. The inputs are identical to the
-#' \code{\link{pmp}} function, so please see that documentation for details.
+#' @details This function calls \code{pmp()} once for each study to be combined
+#' where the posterior model probabilities for one study are used as the priors
+#' for the next study. The inputs are identical to the \code{\link{pmp}}
+#' function, so please see that documentation for details. One exeption is that
+#' values for \code{se0} are ignored as they are calculated automatically.
 #'
 #' @inheritParams pmp
 #' 
@@ -24,7 +25,7 @@
 #' x
 #' plot(x)
 pmp.combo <- function(beta, se.beta, beta0=0, percent=99, H0=c(0,0),
-                       scale=FALSE, mod.priors=rep(1/3, 3), var.mult = 1,
+                       scale=FALSE, mod.priors=rep(1/3, 3), var.mult=1,
                        adjust=FALSE, epsilon=1e-6, adj.factor=0.0001,
                        ... ) {
 
