@@ -47,7 +47,8 @@
 #' otherwise the null is defined as the range between the lower and upper value.
 #' 
 #' @param mod.priors Prior model probabilities; default is an equal probability
-#' of 1/3.
+#' of 1/3, and they are specified in the following order: \code{H<0},
+#' \code{H=0}, \code{H>0}.
 #' 
 #' @param scale Logical. Whether to scale the effect size by its standard
 #' error. Standardising has no effect on the calculations but standardised

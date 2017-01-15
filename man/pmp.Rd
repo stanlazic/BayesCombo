@@ -31,7 +31,8 @@ values are identical (e.g. \code{H0 = c(0,0)}) a point null is used,
 otherwise the null is defined as the range between the lower and upper value.}
 
 \item{mod.priors}{Prior model probabilities; default is an equal probability
-of 1/3.}
+of 1/3, and they are specified in the following order: \code{H<0},
+\code{H=0}, \code{H>0}.}
 
 \item{scale}{Logical. Whether to scale the effect size by its standard
 error. Standardising has no effect on the calculations but standardised

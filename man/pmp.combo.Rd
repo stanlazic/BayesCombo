@@ -29,7 +29,8 @@ error. Standardising has no effect on the calculations but standardised
 effect sizes may be easier to compare in a forest plot.}
 
 \item{mod.priors}{Prior model probabilities; default is an equal probability
-of 1/3.}
+of 1/3, and they are specified in the following order: \code{H<0},
+\code{H=0}, \code{H>0}.}
 
 \item{var.mult}{Variance multiplier used to increase or decrease the prior
 variance. Used in conjunction with \code{percent} when \code{se0 = NULL}.}
@@ -60,10 +61,11 @@ errors and calculates the posterior model probabilities for each hypothesis
 effect size is greater than zero).
 }
 \details{
-This function calls \code{pmp()} once for each study to be
-combined where the posterior model probabilities for one study are used as
-the priors for the next study. The inputs are identical to the
-\code{\link{pmp}} function, so please see that documentation for details.
+This function calls \code{pmp()} once for each study to be combined
+where the posterior model probabilities for one study are used as the priors
+for the next study. The inputs are identical to the \code{\link{pmp}}
+function, so please see that documentation for details. One exeption is that
+values for \code{se0} are ignored as they are calculated automatically.
 }
 \examples{
 x <- pmp.combo(beta = c(0.0126, 5.0052, 1.2976, 0.0005),

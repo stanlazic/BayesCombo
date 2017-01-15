@@ -61,7 +61,7 @@ forestplot <- function(x, range=NULL, xlab="Effect size", ylab="Study",
     if (is.null(labels)) { 
         axis(2, at=1:x$N)
     } else {
-        axis(2, at=1:x$N, label=labels)
+        axis(2, at=1:x$N, labels=labels)
     }
 
     # priors
