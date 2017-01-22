@@ -6,7 +6,7 @@
 #' @param se.beta Standard error of the effect.
 #' @param beta0  Prior for the effect size.
 #' @param se0 Prior standard error.
-#' @param percent A numeric value that is used to calculate the prior variance.
+#' @param ci A numeric value that is used to calculate the prior standard error.
 #' 
 # posterior mean (standard Bayesian updating for normal conjugate prior)
 calc.post.beta <- function(beta, se.beta, beta0, se0){
@@ -23,15 +23,15 @@ calc.post.se <- function(se.beta, se0){
 
 #' @rdname calc.post.beta
 # Prior variance
-prior.se <- function(beta, se.beta, percent) {
+prior.se <- function(beta, se.beta, ci) {
     
     if (!is.numeric(beta))    stop("beta is not numeric")
     if (!is.numeric(se.beta)) stop("se.beta is not numeric")
     
     # multiplier for confidence intervals
-    percent <- (percent / 100)
-    percent <- percent + (1 - percent) / 2
-    multiplier <- qnorm(percent)
+    ci <- (ci / 100)
+    ci <- ci + (1 - ci) / 2
+    multiplier <- qnorm(ci)
     data <- matrix(NA, ncol = 2, nrow = length(beta))
     
     # get min/max

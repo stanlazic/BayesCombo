@@ -1,7 +1,7 @@
 Package: BayesCombo
 Title: Bayesian Evidence Combination
 Version: 1.0
-Date: 2017-01-15
+Date: 2017-01-22
 Author: Bruno Contrino, Stanley E. Lazic
 Maintainer: Stanley E. Lazic <stan.lazic@cantab.net>
 Description: Combine diverse evidence across multiple studies to test a high level scientific theory. The methods can also be used as an alternative to a standard meta-analysis.
@@ -13,8 +13,7 @@ Suggests:
     knitr,
     rmarkdown,
     labstats,
-    testthat,
-    lattice
+    testthat
 URL: https://github.com/stanlazic/BayesCombo
 BugReports: https://github.com/stanlazic/BayesCombo/issues
 VignetteBuilder: knitr

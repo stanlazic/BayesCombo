@@ -10,7 +10,7 @@ calc.post.beta(beta, se.beta, beta0, se0)
 
 calc.post.se(se.beta, se0)
 
-prior.se(beta, se.beta, percent)
+prior.se(beta, se.beta, ci)
 }
 \arguments{
 \item{beta}{Effect size.}
@@ -21,7 +21,7 @@ prior.se(beta, se.beta, percent)
 
 \item{se0}{Prior standard error.}
 
-\item{percent}{A numeric value that is used to calculate the prior variance.}
+\item{ci}{A numeric value that is used to calculate the prior standard error.}
 }
 \description{
 Not called directly by user.

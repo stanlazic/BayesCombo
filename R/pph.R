@@ -1,9 +1,9 @@
-#' @title Calculates posterior model probabilities for one study
+#' @title Calculates the posterior probability of hypotheses for one study
 #'
-#' @description The function takes a single effect size and a its standard error
-#' and calculates the posterior model probabilities for each hypothesis (H<: the
-#' effect size is less than 0, H0: the effect size is zero, or H>: the effect
-#' size is greater than zero).
+#' @description The function takes a single effect size and its standard error
+#' and calculates the posterior probability of each hypothesis (H<: the effect
+#' size is less than 0, H0: the effect size is zero, or H>: the effect size is
+#' greater than zero).
 #'
 #' @details Effect sizes could be a mean difference between groups, regression
 #' slope, odds ratio, or other values provided by statistical models. The
@@ -11,8 +11,8 @@
 #' by most statistical software.
 #'
 #' Two types of priors need to be specified. The first is the prior for the
-#' effect size, which is given by a mean (usually zero) and variance, which can
-#' be specified by the user or calculated automatically. Second, prior
+#' effect size, which is given by a mean (usually zero) and standard error,
+#' which can be specified by the user or calculated automatically. Second, prior
 #' probabilities for each hypothesis need to be provided, and an equal
 #' probability of 1/3 is used by default.
 #'
@@ -22,7 +22,7 @@
 #' enough to zero for practical purposes. 'Close enough' is defined by the user
 #' as a range on either size of zero.
 #'
-#' To combine multiple effect sizes use the \code{pmp.combo} function.
+#' To combine multiple effect sizes use the \code{ev.combo} function.
 #'
 #' @param beta Effect size.
 #' 
@@ -33,54 +33,55 @@
 #' @param se0 A prior standard error for the effect size. Default is \code{NULL}
 #' and is calculated automatically.
 #' 
-#' @param percent Is used to calculate the prior variance if \code{se0 =
-#' NULL}. The default value of 99 calculates the prior variance so that the 99%
-#' confidence intervals of the prior distribution are aligned with the largest
-#' (furthest from zero) confidence interval of the data distribution.
+#' @param ci Is used to calculate the prior standard error if \code{se0 =
+#' NULL}. The default value of 99 calculates the prior standard error so that
+#' the 99% confidence intervals of the prior distribution are aligned with the
+#' largest (furthest from zero) confidence interval of the data distribution.
 #' 
-#' @param var.mult Variance multiplier used to increase or decrease the prior
-#' variance. Used in conjunction with \code{percent} when \code{se0 = NULL}.
+#' @param se.mult Standard error multiplier used to increase or decrease the
+#' prior SE and used in conjunction with \code{ci} when \code{se0 = NULL}.
 #' 
 #' 
 #' @param H0 A vector of length two that defines the null hypothesis. If the
 #' values are identical (e.g. \code{H0 = c(0,0)}) a point null is used,
 #' otherwise the null is defined as the range between the lower and upper value.
 #' 
-#' @param mod.priors Prior model probabilities; default is an equal probability
-#' of 1/3, and they are specified in the following order: \code{H<0},
-#' \code{H=0}, \code{H>0}.
+#' @param H.priors Prior hypothesis probabilities; default is an equal
+#' probability of 1/3, and they are specified in the following order:
+#' \code{H<0}, \code{H=0}, \code{H>0}.
 #' 
 #' @param scale Logical. Whether to scale the effect size by its standard
 #' error. Standardising has no effect on the calculations but standardised
 #' effect sizes may be easier to compare in a forest plot.
 #' 
-#' @param adjust Logical. Whether to adjust very small posterior model
+#' @param adjust Logical. Whether to adjust very small posterior hypothesis
 #' probabilities. Adjusting prevents a single study from having too much
 #' influence on the results when combining multiple studies. For example, if the
 #' probability for a hypothesis from one study is zero, then additional studies
 #' cannot alter this probability (multiplying anything by zero is still zero).
 #' 
-#' @param epsilon A small value that a posterior model probability must fall
-#' below before an adjustment is made. Ignored if \code{adjust = FALSE}.
+#' @param epsilon A small value that a posterior hypothesis probability must
+#' fall below before an adjustment is made. Ignored if \code{adjust = FALSE}.
 #' 
-#' @param adj.factor A small number added to each posterior model probability if
-#' \code{adjust = TRUE} and one of the posterior model probabilities is less
-#' than \code{epsilon}. The PMPs are then re-scaled to sum to one.
+#' @param adj.factor A small number added to each posterior hypothesis
+#' probability if \code{adjust = TRUE} and one of the posterior hypothesis
+#' probabilities is less than \code{epsilon}. The PPHs are then re-scaled to sum
+#' to one.
 #'
-#' @return Object of class \code{pmp} which contains the posterior model
+#' @return Object of class \code{pph} which contains the posterior hypothesis
 #' probabilities and other calculated values.
 #' 
-#' @seealso \code{\link{plot.PMP}}, \code{\link{pmp.combo}}
+#' @seealso \code{\link{plot.PPH}}, \code{\link{ev.combo}}
 #' @export
 #' @examples
-#' # library(labstats) # need to install separately
+#' # library(labstats) # need to install from CRAN
 #' # plot(time.immob ~ dose, data=fluoxetine) 
 #' # summary(lm(time.immob ~ dose, data=fluoxetine))
-#' x <- pmp(beta=-0.25200, se.beta=0.09913) # dose effect from above output
+#' x <- pph(beta=-0.25200, se.beta=0.09913) # dose effect from above output
 #' x
 
-pmp <- function(beta, se.beta, beta0 = 0, se0 = NULL, percent = 99,
-                var.mult = 1, H0 = c(0,0), mod.priors = rep(1/3, 3),
+pph <- function(beta, se.beta, beta0 = 0, se0 = NULL, ci = 99,
+                se.mult = 1, H0 = c(0,0), H.priors = rep(1/3, 3),
                 scale = FALSE, adjust = FALSE, epsilon = 1e-6,
                 adj.factor = 0.0001) {
 
@@ -101,12 +102,12 @@ pmp <- function(beta, se.beta, beta0 = 0, se0 = NULL, percent = 99,
         se.beta <- se.beta/se.beta
     }
 
-    if (percent <= 0 | percent >= 100 ) {
-        stop("percent must lie between zero and one.")
+    if (ci <= 0 | ci >= 100 ) {
+        stop("ci must lie between zero and one.")
     }
 
     if (is.null(se0)){ # calculate if not given
-        se0 <- prior.se(beta, se.beta, percent) * var.mult
+        se0 <- prior.se(beta, se.beta, ci) * se.mult
     }
     
     post.b <- calc.post.beta(beta, se.beta, beta0, se0)
@@ -131,20 +132,20 @@ pmp <- function(beta, se.beta, beta0 = 0, se0 = NULL, percent = 99,
 
     bfs <-c("H<" = lt, "H0" = null, "H>" = gt)
 
-    # PMPs
-    pmps <- (bfs * mod.priors)/ sum(bfs * mod.priors)
-    names(pmps) <- c("H<","H0","H>")
+    # PPHs
+    pphs <- (bfs * H.priors) / sum(bfs * H.priors)
+    names(pphs) <- c("H<", "H0", "H>")
 
-    if (adjust & any(pmps < epsilon)){
-        adj <- pmps + adj.factor
-        pmps <- adj/sum(adj)
+    if (adjust & any(pphs < epsilon)){
+        adj <- pphs + adj.factor
+        pphs <- adj/sum(adj)
     }
 
     return(
         structure(list(beta = beta, se.beta = se.beta, beta0 = beta0,
-                       percent = percent, se0 = se0, post.b = post.b,
-                       post.se = post.se, mod.priors=mod.priors, BFs = bfs,
-                       pmps = pmps),
-                  class = "PMP")
+                       ci = ci, se0 = se0, post.b = post.b,
+                       post.se = post.se, H.priors = H.priors, BFs = bfs,
+                       pphs = pphs),
+                  class = "PPH")
         )
 }

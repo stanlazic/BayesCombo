@@ -1,53 +1,45 @@
-#' @title Print and summary methods for PMP, PMPlist, and BSfactor objects
+#' @title Print and summary methods for PPH and EV objects
 #'
-#' @description Print and summary methods for PMP, PMPlist, BSfactor objects.
+#' @description Print and summary methods for PPH and EV objects.
 #'
-#' @param x A \code{PMP}, \code{PMPlist}, or \code{BSfactor} object.
+#' @param x A \code{PPH} or \code{EV} object.
 #' @param digits Number of digits to show.
 #'
-#' @return A list of posterior model probabilities and other calculated values.
-#' @method summary PMP
+#' @return A list of posterior hypothesis probabilities and other calculated
+#' values.
+#' @method summary PPH
 
 # summarise one study
-summary.PMP <- function(x, digits=4){
-    return(round(x$pmps, digits))
+summary.PPH <- function(x, digits=4){
+    return(round(x$pphs, digits))
 }
 
 
-#' @rdname summary.PMP
-#' @method print PMP
+#' @rdname summary.PPH
+#' @method print PPH
 
-print.PMP <- function(x, digits=4){
+print.PPH <- function(x, digits=4){
     return(list("post.b"=round(x$post.b, digits),
                 "post.se"=round(x$post.se, digits),
                 "BFs"=round(x$BFs, digits),
-                "pmps"=round(x$pmps, digits))) 
+                "pphs"=round(x$pphs, digits))) 
 }
 
 
 # summarise multiple studies
-#' @rdname summary.PMP
-#' @method summary PMPlist
+#' @rdname summary.PPH
+#' @method summary EV
 
-summary.PMPlist <- function(x, digits=4){
-    return(round(x$pmps, digits))
+summary.EV <- function(x, digits=4){
+    return(round(x$pphs, digits))
 }
 
 
-#' @rdname summary.PMP
-#' @method print PMPlist
+#' @rdname summary.PPH
+#' @method print EV
 
-print.PMPlist <- function(x, digits=4){
+print.EV <- function(x, digits=4){
     return(list("post.b"=round(x$post.b, digits),
                 "post.se"=round(x$post.se, digits),
-                "pmps"=round(x$pmps, digits))) 
-}
-
-
-# summarise multiple studies
-#' @rdname summary.PMP
-#' @method summary BSfactor
-
-summary.BSfactor <- function(x, digits=4){
-    return(round(x$boundary, digits))
+                "pphs"=round(x$pphs, digits))) 
 }

@@ -1,11 +1,12 @@
-#' @title Plot of prior, data, and posterior distributions
+#' @title Plot of prior, likelihood, and posterior distributions
 #'
-#' @description Plots the results from a single study.
+#' @description Plots the prior, likelihood, and posterior distribution from a
+#' single study.
 #'
-#' @details Plots the prior, data (likelihood), and posterior distribution
-#' calculated from the \code{pmp()} function for a single study.
+#' @details Plots the prior, likelihood (data), and posterior distribution
+#' calculated from the \code{pph()} function for a single study.
 #'
-#' @param x A \code{PMP} object created by the \code{pmp()} function.
+#' @param x A \code{PPH} object created by the \code{pph()} function.
 #' 
 #' @param range A numeric vector of length two that sets the range of the
 #' x-axis. Values are passed to \code{xlim}. Sensible default values are used
@@ -24,19 +25,19 @@
 #'
 #' @return Plot of distributions.
 #'
-#' @seealso \code{\link{pmp}}
+#' @seealso \code{\link{pph}}
 #'
 #' @export
 #'
 #' @examples
-#' x <- pmp(beta = 5.005, se.beta = 2.05)
+#' x <- pph(beta = 5.005, se.beta = 2.05)
 #' plot(x)
 
-plot.PMP <- function(x, range=NULL, n=200, leg.loc="topleft",
+plot.PPH <- function(x, range=NULL, n=200, leg.loc="topleft",
                      xlab="Effect size", ylab="", ...) {
 
-    if (!inherits(x, "PMP") ) {
-        stop("Input must be a 'PMP' object from the pmp() function.")
+    if (!inherits(x, "PPH") ) {
+        stop("Input must be a 'PPH' object from the pph() function.")
     }
 
     if (is.null(range)){
